@@ -1,0 +1,11 @@
+# NetBeans specific
+/netbeans/nbproject/private/
+/netbeans/build/
+/netbeans/nbbuild/
+/netbeans/dist/
+/netbeans/nbdist/
+/netbeans/nbactions.xml
+/netbeans/nb-configuration.xml
+
+# OS
+.DS_Store
