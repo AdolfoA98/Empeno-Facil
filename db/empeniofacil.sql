@@ -1,4 +1,6 @@
--- MySQL dump 10.13  Distrib 5.5.59, for Win64 (AMD64)
+CREATE DATABASE  IF NOT EXISTS `empeniofacil` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `empeniofacil`;
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: empeniofacil
 -- ------------------------------------------------------
@@ -45,13 +47,13 @@ LOCK TABLES `apartado` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `artículo`
+-- Table structure for table `articulo`
 --
 
-DROP TABLE IF EXISTS `artículo`;
+DROP TABLE IF EXISTS `articulo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `artículo` (
+CREATE TABLE `articulo` (
   `idArtículo` int(11) NOT NULL,
   `descuento` varchar(45) DEFAULT NULL,
   `precio` double DEFAULT NULL,
@@ -70,66 +72,66 @@ CREATE TABLE `artículo` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `artículo`
+-- Dumping data for table `articulo`
 --
 
-LOCK TABLES `artículo` WRITE;
-/*!40000 ALTER TABLE `artículo` DISABLE KEYS */;
-/*!40000 ALTER TABLE `artículo` ENABLE KEYS */;
+LOCK TABLES `articulo` WRITE;
+/*!40000 ALTER TABLE `articulo` DISABLE KEYS */;
+/*!40000 ALTER TABLE `articulo` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `artículo_has_apartado`
+-- Table structure for table `articulo_has_apartado`
 --
 
-DROP TABLE IF EXISTS `artículo_has_apartado`;
+DROP TABLE IF EXISTS `articulo_has_apartado`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `artículo_has_apartado` (
-  `Artículo_idArtículo` int(11) NOT NULL,
+CREATE TABLE `articulo_has_apartado` (
+  `Articulo_idArticulo` int(11) NOT NULL,
   `Apartado_idApartado` int(11) NOT NULL,
-  PRIMARY KEY (`Artículo_idArtículo`,`Apartado_idApartado`),
+  PRIMARY KEY (`Articulo_idArticulo`,`Apartado_idApartado`),
   KEY `fk_Artículo_has_Apartado_Apartado1_idx` (`Apartado_idApartado`),
-  KEY `fk_Artículo_has_Apartado_Artículo1_idx` (`Artículo_idArtículo`),
+  KEY `fk_Artículo_has_Apartado_Artículo1_idx` (`Articulo_idArticulo`),
   CONSTRAINT `fk_Artículo_has_Apartado_Apartado1` FOREIGN KEY (`Apartado_idApartado`) REFERENCES `apartado` (`idApartado`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Artículo_has_Apartado_Artículo1` FOREIGN KEY (`Artículo_idArtículo`) REFERENCES `artículo` (`idArtículo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_Artículo_has_Apartado_Artículo1` FOREIGN KEY (`Articulo_idArticulo`) REFERENCES `articulo` (`idArtículo`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `artículo_has_apartado`
+-- Dumping data for table `articulo_has_apartado`
 --
 
-LOCK TABLES `artículo_has_apartado` WRITE;
-/*!40000 ALTER TABLE `artículo_has_apartado` DISABLE KEYS */;
-/*!40000 ALTER TABLE `artículo_has_apartado` ENABLE KEYS */;
+LOCK TABLES `articulo_has_apartado` WRITE;
+/*!40000 ALTER TABLE `articulo_has_apartado` DISABLE KEYS */;
+/*!40000 ALTER TABLE `articulo_has_apartado` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `artículo_has_venta`
+-- Table structure for table `articulo_has_venta`
 --
 
-DROP TABLE IF EXISTS `artículo_has_venta`;
+DROP TABLE IF EXISTS `articulo_has_venta`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `artículo_has_venta` (
-  `Artículo_idArtículo` int(11) NOT NULL,
+CREATE TABLE `articulo_has_venta` (
+  `Articulo_idArticulo` int(11) NOT NULL,
   `Venta_idVenta` int(11) NOT NULL,
-  PRIMARY KEY (`Artículo_idArtículo`,`Venta_idVenta`),
+  PRIMARY KEY (`Articulo_idArticulo`,`Venta_idVenta`),
   KEY `fk_Artículo_has_Venta_Venta1_idx` (`Venta_idVenta`),
-  KEY `fk_Artículo_has_Venta_Artículo1_idx` (`Artículo_idArtículo`),
-  CONSTRAINT `fk_Artículo_has_Venta_Artículo1` FOREIGN KEY (`Artículo_idArtículo`) REFERENCES `artículo` (`idArtículo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  KEY `fk_Artículo_has_Venta_Artículo1_idx` (`Articulo_idArticulo`),
+  CONSTRAINT `fk_Artículo_has_Venta_Artículo1` FOREIGN KEY (`Articulo_idArticulo`) REFERENCES `articulo` (`idArtículo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Artículo_has_Venta_Venta1` FOREIGN KEY (`Venta_idVenta`) REFERENCES `venta` (`idVenta`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `artículo_has_venta`
+-- Dumping data for table `articulo_has_venta`
 --
 
-LOCK TABLES `artículo_has_venta` WRITE;
-/*!40000 ALTER TABLE `artículo_has_venta` DISABLE KEYS */;
-/*!40000 ALTER TABLE `artículo_has_venta` ENABLE KEYS */;
+LOCK TABLES `articulo_has_venta` WRITE;
+/*!40000 ALTER TABLE `articulo_has_venta` DISABLE KEYS */;
+/*!40000 ALTER TABLE `articulo_has_venta` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -193,12 +195,12 @@ DROP TABLE IF EXISTS `cliente`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cliente` (
   `idCliente` int(11) NOT NULL,
-  `nombre` varchar(45) DEFAULT NULL,
-  `apellidos` varchar(45) DEFAULT NULL,
+  `nombre` varchar(100) DEFAULT NULL,
+  `apellidos` varchar(150) DEFAULT NULL,
   `rfc` int(11) DEFAULT NULL,
-  `curp` varchar(45) DEFAULT NULL,
+  `curp` varchar(18) DEFAULT NULL,
   `idIdentificacion` int(11) DEFAULT NULL,
-  `cotitular` varchar(45) DEFAULT NULL,
+  `cotitular` varchar(250) DEFAULT NULL,
   `listaNegra` tinyint(4) DEFAULT NULL,
   `tipoIdentificacion_idCatalogo` int(11) NOT NULL,
   PRIMARY KEY (`idCliente`),
@@ -293,10 +295,10 @@ CREATE TABLE `empleado` (
   `idEmpleado` int(11) NOT NULL,
   `Sucursal_idSucursal` int(11) NOT NULL,
   `numeroPersonal` int(11) DEFAULT NULL,
-  `nombreEmpleado` varchar(45) DEFAULT NULL,
-  `contrasenia` varchar(45) DEFAULT NULL,
+  `nombreEmpleado` varchar(250) DEFAULT NULL,
+  `contrasenia` varchar(50) DEFAULT NULL,
   `tipoEmpleado_idCatalogo` int(11) NOT NULL,
-  `nombreUsuario` varchar(45) DEFAULT NULL,
+  `nombreUsuario` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`idEmpleado`),
   KEY `fk_Empleado_Sucursal1_idx` (`Sucursal_idSucursal`),
   KEY `fk_Empleado_Catalogo1_idx` (`tipoEmpleado_idCatalogo`),
@@ -327,7 +329,7 @@ CREATE TABLE `foto_articulo` (
   `foto` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idFoto_Articulo`),
   KEY `fk_Foto_Articulo_Artículo1_idx` (`Artículo_idArtículo`),
-  CONSTRAINT `fk_Foto_Articulo_Artículo1` FOREIGN KEY (`Artículo_idArtículo`) REFERENCES `artículo` (`idArtículo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_Foto_Articulo_Artículo1` FOREIGN KEY (`Artículo_idArtículo`) REFERENCES `articulo` (`idArtículo`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -430,11 +432,11 @@ DROP TABLE IF EXISTS `prenda`;
 CREATE TABLE `prenda` (
   `idPrenda` int(11) NOT NULL,
   `Contrato_idContrato` int(11) NOT NULL,
-  `descripcion` varchar(45) DEFAULT NULL,
   `valor` double DEFAULT NULL,
-  `nombre` varchar(45) DEFAULT NULL,
+  `nombre` varchar(250) DEFAULT NULL,
   `tipoPrenda_idCatalogo` int(11) NOT NULL,
   `tipoCategoria_idCatalogo1` int(11) NOT NULL,
+  `descripcion` text,
   PRIMARY KEY (`idPrenda`),
   KEY `fk_Prenda_Contrato1_idx` (`Contrato_idContrato`),
   KEY `fk_Prenda_Catalogo1_idx` (`tipoPrenda_idCatalogo`),
@@ -518,4 +520,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-19 18:36:06
+-- Dump completed on 2019-04-10 11:19:09
