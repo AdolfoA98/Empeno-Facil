@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `empenofacil`.`itemcatalogo` (
   `itemcatalogoSuperior` INT NULL,
   `nombre` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`iditemcatalogo`),
-  INDEX `fk_catalogo_catalogo1_idx` (`itemcatalogoSuperior` ASC) VISIBLE,
+  INDEX `fk_catalogo_catalogo1_idx` (`itemcatalogoSuperior` ASC),
   CONSTRAINT `fk_catalogo_catalogo1`
     FOREIGN KEY (`itemcatalogoSuperior`)
     REFERENCES `empenofacil`.`itemcatalogo` (`iditemcatalogo`)
@@ -61,9 +61,9 @@ CREATE TABLE IF NOT EXISTS `empenofacil`.`empleado` (
   `nombreusuario` VARCHAR(45) NOT NULL,
   `contrasenahash` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idempleado`),
-  INDEX `fk_empleado_sucursal_idx` (`sucursal` ASC) VISIBLE,
-  INDEX `fk_empleado_catalogo1_idx` (`tipoempleado` ASC) VISIBLE,
-  UNIQUE INDEX `nombreUsuario_UNIQUE` (`nombreusuario` ASC) VISIBLE,
+  INDEX `fk_empleado_sucursal_idx` (`sucursal` ASC),
+  INDEX `fk_empleado_catalogo1_idx` (`tipoempleado` ASC),
+  UNIQUE INDEX `nombreUsuario_UNIQUE` (`nombreusuario` ASC),
   CONSTRAINT `fk_empleado_sucursal`
     FOREIGN KEY (`sucursal`)
     REFERENCES `empenofacil`.`sucursal` (`idsucursal`)
@@ -89,8 +89,8 @@ CREATE TABLE IF NOT EXISTS `empenofacil`.`cliente` (
   `curp` VARCHAR(45) NULL,
   `identificacion` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idcliente`),
-  INDEX `fk_cliente_catalogo1_idx` (`tipoidentificacion` ASC) VISIBLE,
-  UNIQUE INDEX `identificacion_UNIQUE` (`identificacion` ASC) VISIBLE,
+  INDEX `fk_cliente_catalogo1_idx` (`tipoidentificacion` ASC),
+  UNIQUE INDEX `identificacion_UNIQUE` (`identificacion` ASC),
   CONSTRAINT `fk_cliente_catalogo1`
     FOREIGN KEY (`tipoidentificacion`)
     REFERENCES `empenofacil`.`itemcatalogo` (`iditemcatalogo`)
@@ -112,9 +112,9 @@ CREATE TABLE IF NOT EXISTS `empenofacil`.`registrolistanegra` (
   `fecharetira` DATETIME NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `motivoretira` VARCHAR(45) NULL,
   PRIMARY KEY (`idregistrolistanegra`),
-  INDEX `fk_RegistroListaNegra_cliente1_idx` (`cliente` ASC) VISIBLE,
-  INDEX `fk_registrolistanegra_empleado1_idx` (`empleadoagrega` ASC) VISIBLE,
-  INDEX `fk_registrolistanegra_empleado2_idx` (`empleadoretira` ASC) VISIBLE,
+  INDEX `fk_RegistroListaNegra_cliente1_idx` (`cliente` ASC),
+  INDEX `fk_registrolistanegra_empleado1_idx` (`empleadoagrega` ASC),
+  INDEX `fk_registrolistanegra_empleado2_idx` (`empleadoretira` ASC),
   CONSTRAINT `fk_RegistroListaNegra_cliente1`
     FOREIGN KEY (`cliente`)
     REFERENCES `empenofacil`.`cliente` (`idcliente`)
@@ -151,8 +151,8 @@ CREATE TABLE IF NOT EXISTS `empenofacil`.`fotografiacliente` (
   `cliente` INT NOT NULL,
   `fotografia` INT NOT NULL,
   PRIMARY KEY (`cliente`, `fotografia`),
-  INDEX `fk_cliente_has_fotografia_fotografia1_idx` (`fotografia` ASC) VISIBLE,
-  INDEX `fk_cliente_has_fotografia_cliente1_idx` (`cliente` ASC) VISIBLE,
+  INDEX `fk_cliente_has_fotografia_fotografia1_idx` (`fotografia` ASC),
+  INDEX `fk_cliente_has_fotografia_cliente1_idx` (`cliente` ASC),
   CONSTRAINT `fk_cliente_has_fotografia_cliente1`
     FOREIGN KEY (`cliente`)
     REFERENCES `empenofacil`.`cliente` (`idcliente`)
@@ -170,7 +170,7 @@ ENGINE = InnoDB;
 -- Table `empenofacil`.`transaccioncaja`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `empenofacil`.`transaccioncaja` (
-  `idtransaccioncaja` INT NOT NULL,
+  `idtransaccioncaja` INT NOT NULL AUTO_INCREMENT,
   `sucursal` INT NOT NULL,
   `cancelacion` INT NULL,
   `monto` DECIMAL(15,2) NOT NULL,
@@ -178,8 +178,8 @@ CREATE TABLE IF NOT EXISTS `empenofacil`.`transaccioncaja` (
   `fechahora` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `descripcion` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`idtransaccioncaja`),
-  INDEX `fk_transaccioncaja_sucursal1_idx` (`sucursal` ASC) VISIBLE,
-  INDEX `fk_transaccioncaja_transaccioncaja1_idx` (`cancelacion` ASC) VISIBLE,
+  INDEX `fk_transaccioncaja_sucursal1_idx` (`sucursal` ASC),
+  INDEX `fk_transaccioncaja_transaccioncaja1_idx` (`cancelacion` ASC),
   CONSTRAINT `fk_transaccioncaja_sucursal1`
     FOREIGN KEY (`sucursal`)
     REFERENCES `empenofacil`.`sucursal` (`idsucursal`)
@@ -208,9 +208,9 @@ CREATE TABLE IF NOT EXISTS `empenofacil`.`empeno` (
   `almacenaje` DECIMAL(15,2) NOT NULL,
   `nombrecotitular` VARCHAR(100) NULL,
   PRIMARY KEY (`idempeno`),
-  INDEX `fk_empeno_empleado1_idx` (`empleado` ASC) VISIBLE,
-  INDEX `fk_empeno_cliente1_idx` (`cliente` ASC) VISIBLE,
-  INDEX `fk_empeno_transaccioncaja1_idx` (`transaccioncaja` ASC) VISIBLE,
+  INDEX `fk_empeno_empleado1_idx` (`empleado` ASC),
+  INDEX `fk_empeno_cliente1_idx` (`cliente` ASC),
+  INDEX `fk_empeno_transaccioncaja1_idx` (`transaccioncaja` ASC),
   CONSTRAINT `fk_empeno_empleado1`
     FOREIGN KEY (`empleado`)
     REFERENCES `empenofacil`.`empleado` (`idempleado`)
@@ -243,9 +243,9 @@ CREATE TABLE IF NOT EXISTS `empenofacil`.`prenda` (
   `descripcion` VARCHAR(100) NOT NULL,
   `peso` DECIMAL(15,4) NULL,
   PRIMARY KEY (`idprenda`),
-  INDEX `fk_prenda_empeno1_idx` (`empeno` ASC) VISIBLE,
-  INDEX `fk_prenda_itemCatalogo1_idx` (`tipo` ASC) VISIBLE,
-  INDEX `fk_prenda_itemcatalogo2_idx` (`categoria` ASC) VISIBLE,
+  INDEX `fk_prenda_empeno1_idx` (`empeno` ASC),
+  INDEX `fk_prenda_itemCatalogo1_idx` (`tipo` ASC),
+  INDEX `fk_prenda_itemcatalogo2_idx` (`categoria` ASC),
   CONSTRAINT `fk_prenda_empeno1`
     FOREIGN KEY (`empeno`)
     REFERENCES `empenofacil`.`empeno` (`idempeno`)
@@ -271,8 +271,8 @@ CREATE TABLE IF NOT EXISTS `empenofacil`.`fotografiaprenda` (
   `prenda` INT NOT NULL,
   `fotografia` INT NOT NULL,
   PRIMARY KEY (`prenda`, `fotografia`),
-  INDEX `fk_prenda_has_fotografia_fotografia1_idx` (`fotografia` ASC) VISIBLE,
-  INDEX `fk_prenda_has_fotografia_prenda1_idx` (`prenda` ASC) VISIBLE,
+  INDEX `fk_prenda_has_fotografia_fotografia1_idx` (`fotografia` ASC),
+  INDEX `fk_prenda_has_fotografia_prenda1_idx` (`prenda` ASC),
   CONSTRAINT `fk_prenda_has_fotografia_prenda1`
     FOREIGN KEY (`prenda`)
     REFERENCES `empenofacil`.`prenda` (`idprenda`)
@@ -300,8 +300,8 @@ CREATE TABLE IF NOT EXISTS `empenofacil`.`articulo` (
   `nombre` VARCHAR(100) NOT NULL,
   `descripcion` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`idarticulo`),
-  INDEX `fk_articulo_empleado1_idx` (`empleado` ASC) VISIBLE,
-  INDEX `fk_articulo_prenda1_idx` (`prenda` ASC) VISIBLE,
+  INDEX `fk_articulo_empleado1_idx` (`empleado` ASC),
+  INDEX `fk_articulo_prenda1_idx` (`prenda` ASC),
   CONSTRAINT `fk_articulo_empleado1`
     FOREIGN KEY (`empleado`)
     REFERENCES `empenofacil`.`empleado` (`idempleado`)
@@ -324,9 +324,9 @@ CREATE TABLE IF NOT EXISTS `empenofacil`.`venta` (
   `cliente` INT NOT NULL,
   `transaccioncaja` INT NOT NULL,
   PRIMARY KEY (`idventa`),
-  INDEX `fk_venta_empleado1_idx` (`empleado` ASC) VISIBLE,
-  INDEX `fk_venta_cliente1_idx` (`cliente` ASC) VISIBLE,
-  INDEX `fk_venta_transaccioncaja1_idx` (`transaccioncaja` ASC) VISIBLE,
+  INDEX `fk_venta_empleado1_idx` (`empleado` ASC),
+  INDEX `fk_venta_cliente1_idx` (`cliente` ASC),
+  INDEX `fk_venta_transaccioncaja1_idx` (`transaccioncaja` ASC),
   CONSTRAINT `fk_venta_empleado1`
     FOREIGN KEY (`empleado`)
     REFERENCES `empenofacil`.`empleado` (`idempleado`)
@@ -352,8 +352,8 @@ CREATE TABLE IF NOT EXISTS `empenofacil`.`articuloenventa` (
   `venta` INT NOT NULL,
   `articulo` INT NOT NULL,
   PRIMARY KEY (`venta`, `articulo`),
-  INDEX `fk_venta_has_articulo_articulo1_idx` (`articulo` ASC) VISIBLE,
-  INDEX `fk_venta_has_articulo_venta1_idx` (`venta` ASC) VISIBLE,
+  INDEX `fk_venta_has_articulo_articulo1_idx` (`articulo` ASC),
+  INDEX `fk_venta_has_articulo_venta1_idx` (`venta` ASC),
   CONSTRAINT `fk_venta_has_articulo_venta1`
     FOREIGN KEY (`venta`)
     REFERENCES `empenofacil`.`venta` (`idventa`)
@@ -376,9 +376,9 @@ CREATE TABLE IF NOT EXISTS `empenofacil`.`pagoempeno` (
   `transaccioncaja` INT NOT NULL,
   `tipo` INT NOT NULL,
   PRIMARY KEY (`idpagoempeno`),
-  INDEX `fk_pagoempeno_empeno1_idx` (`empeno` ASC) VISIBLE,
-  INDEX `fk_pagoempeno_transaccioncaja1_idx` (`transaccioncaja` ASC) VISIBLE,
-  INDEX `fk_pagoempeno_itemcatalogo1_idx` (`tipo` ASC) VISIBLE,
+  INDEX `fk_pagoempeno_empeno1_idx` (`empeno` ASC),
+  INDEX `fk_pagoempeno_transaccioncaja1_idx` (`transaccioncaja` ASC),
+  INDEX `fk_pagoempeno_itemcatalogo1_idx` (`tipo` ASC),
   CONSTRAINT `fk_pagoempeno_empeno1`
     FOREIGN KEY (`empeno`)
     REFERENCES `empenofacil`.`empeno` (`idempeno`)
@@ -406,8 +406,8 @@ CREATE TABLE IF NOT EXISTS `empenofacil`.`apartado` (
   `cliente` INT NOT NULL,
   `fechalimite` DATETIME NOT NULL,
   PRIMARY KEY (`idapartado`),
-  INDEX `fk_apartado_empleado1_idx` (`empleado` ASC) VISIBLE,
-  INDEX `fk_apartado_cliente1_idx` (`cliente` ASC) VISIBLE,
+  INDEX `fk_apartado_empleado1_idx` (`empleado` ASC),
+  INDEX `fk_apartado_cliente1_idx` (`cliente` ASC),
   CONSTRAINT `fk_apartado_empleado1`
     FOREIGN KEY (`empleado`)
     REFERENCES `empenofacil`.`empleado` (`idempleado`)
@@ -428,8 +428,8 @@ CREATE TABLE IF NOT EXISTS `empenofacil`.`articuloenapartado` (
   `apartado` INT NOT NULL,
   `articulo` INT NOT NULL,
   PRIMARY KEY (`apartado`, `articulo`),
-  INDEX `fk_apartado_has_articulo_articulo1_idx` (`articulo` ASC) VISIBLE,
-  INDEX `fk_apartado_has_articulo_apartado1_idx` (`apartado` ASC) VISIBLE,
+  INDEX `fk_apartado_has_articulo_articulo1_idx` (`articulo` ASC),
+  INDEX `fk_apartado_has_articulo_apartado1_idx` (`apartado` ASC),
   CONSTRAINT `fk_apartado_has_articulo_apartado1`
     FOREIGN KEY (`apartado`)
     REFERENCES `empenofacil`.`apartado` (`idapartado`)
@@ -451,8 +451,8 @@ CREATE TABLE IF NOT EXISTS `empenofacil`.`pagoapartado` (
   `apartado` INT NOT NULL,
   `transaccioncaja` INT NOT NULL,
   PRIMARY KEY (`idpagoapartado`),
-  INDEX `fk_pagoapartado_apartado1_idx` (`apartado` ASC) VISIBLE,
-  INDEX `fk_pagoapartado_transaccioncaja1_idx` (`transaccioncaja` ASC) VISIBLE,
+  INDEX `fk_pagoapartado_apartado1_idx` (`apartado` ASC),
+  INDEX `fk_pagoapartado_transaccioncaja1_idx` (`transaccioncaja` ASC),
   CONSTRAINT `fk_pagoapartado_apartado1`
     FOREIGN KEY (`apartado`)
     REFERENCES `empenofacil`.`apartado` (`idapartado`)
@@ -476,9 +476,9 @@ CREATE TABLE IF NOT EXISTS `empenofacil`.`operacionexterna` (
   `transaccioncaja` INT NOT NULL,
   `nota` VARCHAR(100) NULL,
   PRIMARY KEY (`idoperacionexterna`),
-  INDEX `fk_operacionexterna_empleado1_idx` (`empleado` ASC) VISIBLE,
-  INDEX `fk_operacionexterna_itemcatalogo1_idx` (`tipo` ASC) VISIBLE,
-  INDEX `fk_operacionexterna_transaccioncaja1_idx` (`transaccioncaja` ASC) VISIBLE,
+  INDEX `fk_operacionexterna_empleado1_idx` (`empleado` ASC),
+  INDEX `fk_operacionexterna_itemcatalogo1_idx` (`tipo` ASC),
+  INDEX `fk_operacionexterna_transaccioncaja1_idx` (`transaccioncaja` ASC),
   CONSTRAINT `fk_operacionexterna_empleado1`
     FOREIGN KEY (`empleado`)
     REFERENCES `empenofacil`.`empleado` (`idempleado`)
