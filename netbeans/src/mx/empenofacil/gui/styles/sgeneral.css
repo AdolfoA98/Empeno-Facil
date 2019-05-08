@@ -1,0 +1,28 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 4/04/2019, 04:43:38 PM
+    Author     : adolf
+*/
+
+JFXButton {
+    -fx-border-radius: 0em;
+    -fx-background-radius: 0em;
+    -fx-text-alignment: center;
+}
+
+TextField, PasswordField, ComboBox {
+    -fx-border-radius: 0em;
+    -fx-border-color: #707070;
+    -fx-background-radius: 0em;
+}
+
+JFXComboBox {
+    -fx-border-radius: 0em;
+    -fx-background-radius: 0em;
+}
+
+

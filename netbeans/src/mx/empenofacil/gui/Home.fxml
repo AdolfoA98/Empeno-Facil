@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:id="mainPane"
+            prefHeight="550"
+            prefWidth="950"
+            style="-fx-background-color: white;" 
+            xmlns="http://javafx.com/javafx/8"
+            fx:controller="mx.empenofacil.gui.controllers.HomeController">
+    
+    <stylesheets>
+        <URL value="@styles/sgeneral.css" />
+        <URL value="@styles/shome.css" />
+    </stylesheets>
+    
+    <top>
+        <VBox minHeight="70" >
+            <HBox minHeight="30"
+                  style="-fx-background-color: #F3D46D;" >
+                <JFXButton fx:id="ventaSButton"
+                           onAction="#cambiarToolBarAVenta"
+                           text="Empeños y ventas"
+                           maxHeight="25">
+                    <HBox.margin>
+                        <javafx.geometry.Insets left="15" top="5"/>
+                    </HBox.margin>
+                </JFXButton>
+                <JFXButton fx:id="historialSButton"
+                           text="Historial de operaciones"
+                           onAction="#cambiarToolBarAHistorial" 
+                           maxHeight="25">
+                    <HBox.margin>
+                        <javafx.geometry.Insets top="5"/>
+                    </HBox.margin>
+                </JFXButton>
+                <JFXButton fx:id="reportesSButton"
+                           text="Reportes"
+                           onAction="#cambiarToolBarAReportes" 
+                           maxHeight="25">
+                    <HBox.margin>
+                        <javafx.geometry.Insets top="5"/>
+                    </HBox.margin>
+                </JFXButton>
+                <JFXButton fx:id="adminSButton"
+                           text="Administración"
+                           onAction="#cambiarToolBarAAdmin" 
+                           maxHeight="25">
+                    <HBox.margin>
+                        <javafx.geometry.Insets top="5"/>
+                    </HBox.margin>
+                </JFXButton>
+                <StackPane HBox.hgrow="ALWAYS" >
+                    <JFXButton text=""
+                               StackPane.alignment="CENTER_RIGHT"
+                               onAction="#actualizarMontoCaja">
+                        <font>
+                            <Font name="Segoe MDL2 Assets"/>
+                        </font>
+                        <StackPane.margin>
+                            <javafx.geometry.Insets right="135"/>
+                        </StackPane.margin>
+                    </JFXButton>
+                    <Label fx:id="cajaLabel"
+                           StackPane.alignment="CENTER_RIGHT">
+                        <StackPane.margin>
+                            <javafx.geometry.Insets right="15"/>
+                        </StackPane.margin>
+                    </Label>
+                </StackPane>
+            </HBox>
+            <ToolBar fx:id="sectionTools"
+                     minHeight="40"
+                     style="-fx-background-color:#EEEBEB;" />
+        </VBox>
+    </top>
+</BorderPane>

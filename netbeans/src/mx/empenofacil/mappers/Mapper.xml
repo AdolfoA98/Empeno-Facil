@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Categoria">
+    <select id="getMontoBolsa" resultType="double">
+        SELECT balacecaja
+        FROM empenofacil.transaccioncaja
+        ORDER BY idtransaccioncaja DESC
+        limit 1;
+    </select>
+    
+    <insert id="setMontoBolsa" parameterType="map">
+        INSERT INTO transaccioncaja
+        VALUES (NULL, #{sucursal}, NULL, #{monto}, #{balacecaja}, NOW(), #{descripcion});
+    </insert>
+    
+    <insert id="registrarPrenda" parameterType="mx.empenofacil.beans.Prenda">
+        INSERT INTO prenda VALUES (
+            #{idprenda},
+            #{empeno},
+            #{tipo},
+            #{categoria},
+            #{avaluo},
+            #{montoprestado},
+            #{nombre},
+            #{descripcion},
+            #{peso}
+        );
+    </insert>
+    
+    <insert id="registrarEmpeno" parameterType="mx.empenofacil.beans.Empeno">
+        INSERT INTO empeno VALUES (
+            #{idempeno},
+            #{empleado},
+            #{cliente},
+            #{transaccioncaja},
+            #{fecha},
+            #{fechalimite},
+            #{fechaextendida},
+            #{interes},
+            #{almacenaje},
+            #{nombrecotitular}
+        );
+    </insert>
+    
+</mapper>

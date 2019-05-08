@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
+
+<GridPane fx:id="mainPane"
+          prefHeight="220.0"
+          prefWidth="350.0"
+          style="-fx-background-color: white;" 
+          xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="mx.empenofacil.gui.controllers.RegistrarBolsaController">
+    
+    <stylesheets>
+        <URL value="@styles/sgeneral.css" />
+    </stylesheets>
+    
+    <Label text="Registrar monto en bolsa"
+           GridPane.columnSpan="3">
+        <GridPane.margin>
+            <Insets left="20" top="15"/>
+        </GridPane.margin>
+        <font>
+            <Font size="28"/>
+        </font>
+    </Label>
+    
+    <Label text="Ingrese el monto en bolsa actual"
+           wrapText="true"
+           GridPane.columnSpan="2" 
+           GridPane.rowIndex="1">
+        <GridPane.margin>
+            <Insets left="20" top="10"/>
+        </GridPane.margin>
+    </Label>
+    
+    <Label text="Monto"
+           GridPane.rowIndex="2">
+        <GridPane.margin>
+            <Insets left="20" top="10"/>
+        </GridPane.margin>
+    </Label>
+    
+    <TextField fx:id="montoField"
+               minWidth="350"
+               GridPane.rowIndex="3"
+               GridPane.columnSpan="3" >
+        <GridPane.margin>
+            <Insets left="20" top="5" right="20"/>
+        </GridPane.margin>
+    </TextField>
+    
+    <JFXButton text="Cancelar"
+               style="-fx-background-color: #EEEBEB;" 
+               GridPane.rowIndex="4"
+               onAction="#closeStage" 
+               GridPane.columnIndex="1">
+        <GridPane.margin>
+            <Insets left="50" top="30"/>
+        </GridPane.margin>
+    </JFXButton>
+    
+    <JFXButton text="Aceptar"
+               style="-fx-background-color: #EEEBEB;"
+               onAction="#registrarMonto" 
+               GridPane.rowIndex="4"
+               GridPane.columnIndex="2">
+        <GridPane.margin>
+            <Insets left="20" top="30" right="20"/>
+        </GridPane.margin>
+    </JFXButton>
+    
+</GridPane>

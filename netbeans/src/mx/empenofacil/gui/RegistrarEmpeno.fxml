@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+<?import java.net.URL?>
+<?import com.jfoenix.controls.JFXButton?>
+
+<BorderPane fx:id="mainPane"
+            prefHeight="630.0"
+            prefWidth="850.0"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="mx.empenofacil.gui.controllers.RegistrarEmpenoController">
+    
+    <stylesheets>
+        <URL value="@styles/sgeneral.css" />
+    </stylesheets>
+
+    <top>
+        <StackPane style="-fx-background-color: #F3D46D;">
+            <Label text="Registro de empeño"
+                   StackPane.alignment="CENTER_LEFT" >
+                <font>
+                    <Font name="Segoe UI Semilight"
+                          size="26.0"/>
+                </font>
+                <StackPane.margin>
+                    <Insets left="20"/>
+                </StackPane.margin>
+            </Label>
+            
+            <JFXButton fx:id="guardarBtn"
+                       text="Guardar"
+                       StackPane.alignment="CENTER_RIGHT">
+                
+            </JFXButton>
+        </StackPane>
+    </top>
+
+    <left>
+        
+        <VBox style="-fx-background-color: white;" >
+            <Label text="Prenda (s)">
+                <font>
+                    <Font name="Segoe UI Semilight"
+                          size="20.0"/>
+                </font>
+                <VBox.margin>
+                    <Insets top="20"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </Label>
+            
+            <HBox>
+                <javafx.scene.image.ImageView fitHeight="80"
+                                              fitWidth="80"
+                                              fx:id="fotoPrendaView1"
+                                              preserveRatio="true" >
+                    <image>
+                        <javafx.scene.image.Image url="/mx/empenofacil/imagenes/default.png" />
+                    </image>
+                </javafx.scene.image.ImageView>
+                <VBox>
+                    <javafx.scene.image.ImageView fitHeight="25"
+                                                  fitWidth="25"
+                                                  fx:id="fotoPrendaView2"
+                                                  preserveRatio="true" >
+                        <image>
+                            <javafx.scene.image.Image url="/mx/empenofacil/imagenes/default.png" />
+                        </image>
+                        <VBox.margin>
+                            <Insets left="2" bottom="2" />
+                        </VBox.margin>
+                    </javafx.scene.image.ImageView>
+                    <javafx.scene.image.ImageView fitHeight="25"
+                                                  fitWidth="25"
+                                                  fx:id="fotoPrendaView3"
+                                                  preserveRatio="true" >
+                        <image>
+                            <javafx.scene.image.Image url="/mx/empenofacil/imagenes/default.png" />
+                        </image>
+                        <VBox.margin>
+                            <Insets left="2" bottom="2" />
+                        </VBox.margin>
+                    </javafx.scene.image.ImageView>
+                    
+                    <javafx.scene.image.ImageView fitHeight="25"
+                                                  fitWidth="24"
+                                                  fx:id="fotoPrendaView4"
+                                                  preserveRatio="true" >
+                        <image>
+                            <javafx.scene.image.Image url="/mx/empenofacil/imagenes/default.png" />
+                        </image>
+                        <VBox.margin>
+                            <Insets left="2"/>
+                        </VBox.margin>
+                    </javafx.scene.image.ImageView>
+                </VBox>
+                
+                <StackPane HBox.hgrow="ALWAYS">
+                    <JFXButton fx:id="tomarFotoPrendaBtn"
+                               text=" Tomar foto"
+                               onAction="#tomarFotoPrenda" 
+                               style="-fx-background-color:#EEEBEB;" >
+                           
+                    </JFXButton>
+                </StackPane>
+                <VBox.margin>
+                    <Insets top="10"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </HBox>
+    
+            <Label text="Nombre">
+                <font>
+                    <Font name="Segoe UI Semilight"/>
+                </font>
+                <VBox.margin>
+                    <Insets top="10"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </Label>
+    
+            <TextField fx:id="nombrePrendaTxt"
+                       minWidth="290">
+                <VBox.margin>
+                    <Insets top="5"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </TextField>
+            
+            <Label text="Valor">
+                <font>
+                    <Font name="Segoe UI Semilight"/>
+                </font>
+                <VBox.margin>
+                    <Insets top="8"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </Label>
+    
+            <TextField fx:id="valorPrendaTxt"
+                       minWidth="290">
+                <VBox.margin>
+                    <Insets top="5"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </TextField>
+            
+            <Label text="Categoria">
+                <font>
+                    <Font name="Segoe UI Semilight"/>
+                </font>
+                <VBox.margin>
+                    <Insets top="8"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </Label>
+    
+            <ComboBox fx:id="categoriaPrendaCmb"
+                      minWidth="290"
+                      style="-fx-background-color: white;" >
+                <VBox.margin>
+                    <Insets top="5"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </ComboBox>
+            
+            <Label text="Tipo de Prenda">
+                <font>
+                    <Font name="Segoe UI Semilight"/>
+                </font>
+                <VBox.margin>
+                    <Insets top="8"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </Label>
+    
+            <ComboBox fx:id="tipoPrendaCmb"
+                      minWidth="290"
+                      style="-fx-background-color: white;" >
+                <VBox.margin>
+                    <Insets top="5"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </ComboBox>
+            
+            <Label text="Descripción">
+                <font>
+                    <Font name="Segoe UI Semilight"/>
+                </font>
+                <VBox.margin>
+                    <Insets top="8"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </Label>
+    
+            <TextArea fx:id="descripcionPrendaTxt"
+                      maxWidth="290"
+                      maxHeight="55" >
+                <VBox.margin>
+                    <Insets top="5"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </TextArea>
+            
+            <Label text="Prendas totales">
+                <font>
+                    <Font name="Segoe UI Semilight"/>
+                </font>
+                <VBox.margin>
+                    <Insets top="8"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </Label>
+            
+            <ListView fx:id="prendasListView"
+                      maxWidth="290"
+                      maxHeight="100" >
+                <VBox.margin>
+                    <Insets top="5"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </ListView>
+            
+        </VBox>
+        
+    </left>
+    
+    <center>
+        <VBox style="-fx-background-color: white">
+            <Label text="Cliente">
+                <font>
+                    <Font name="Segoe UI Semilight"
+                          size="20.0"/>
+                </font>
+                <VBox.margin>
+                    <Insets top="20"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </Label>
+            
+            <HBox>
+                <javafx.scene.image.ImageView fitHeight="80"
+                                              fitWidth="80"
+                                              fx:id="fotoClienteView1"
+                                              preserveRatio="true" >
+                    <image>
+                        <javafx.scene.image.Image url="/mx/empenofacil/imagenes/default.png" />
+                    </image>
+                </javafx.scene.image.ImageView>
+                <VBox>
+                    <javafx.scene.image.ImageView fitHeight="39"
+                                                  fitWidth="40"
+                                                  fx:id="fotoClienteView2"
+                                                  preserveRatio="true" >
+                        <image>
+                            <javafx.scene.image.Image url="/mx/empenofacil/imagenes/default.png" />
+                        </image>
+                        <VBox.margin>
+                            <Insets left="2" bottom="2" />
+                        </VBox.margin>
+                    </javafx.scene.image.ImageView>
+                    <javafx.scene.image.ImageView fitHeight="39"
+                                                  fitWidth="40"
+                                                  fx:id="fotoClienteView3"
+                                                  preserveRatio="true" >
+                        <image>
+                            <javafx.scene.image.Image url="/mx/empenofacil/imagenes/default.png" />
+                        </image>
+                        <VBox.margin>
+                            <Insets left="2"/>
+                        </VBox.margin>
+                    </javafx.scene.image.ImageView>
+                </VBox>
+                
+                <StackPane HBox.hgrow="ALWAYS">
+                    <JFXButton fx:id="tomarFotoClienteBtn"
+                               text=" Tomar foto"
+                               onAction="#tomarFotoCliente" 
+                               style="-fx-background-color:#EEEBEB;" >
+                           
+                    </JFXButton>
+                </StackPane>
+                <VBox.margin>
+                    <Insets top="10"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </HBox>
+            
+            <Label text="Nombre">
+                <font>
+                    <Font name="Segoe UI Semilight"/>
+                </font>
+                <VBox.margin>
+                    <Insets top="8"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </Label>
+    
+            <TextField fx:id="nombreClienteTxt"
+                       minWidth="290">
+                <VBox.margin>
+                    <Insets top="5"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </TextField>
+            
+            <Label text="Apellidos">
+                <font>
+                    <Font name="Segoe UI Semilight"/>
+                </font>
+                <VBox.margin>
+                    <Insets top="8"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </Label>
+    
+            <TextField fx:id="apellidosClienteTxt"
+                       minWidth="290">
+                <VBox.margin>
+                    <Insets top="5"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </TextField>
+            
+            <Label text="RFC">
+                <font>
+                    <Font name="Segoe UI Semilight"/>
+                </font>
+                <VBox.margin>
+                    <Insets top="8"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </Label>
+    
+            <TextField fx:id="rfcClienteTxt"
+                       minWidth="290">
+                <VBox.margin>
+                    <Insets top="5"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </TextField>
+            
+            <Label text="CURP">
+                <font>
+                    <Font name="Segoe UI Semilight"/>
+                </font>
+                <VBox.margin>
+                    <Insets top="8"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </Label>
+    
+            <TextField fx:id="curpClienteTxt"
+                       minWidth="290">
+                <VBox.margin>
+                    <Insets top="5"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </TextField>
+            
+            <Label text="Cotitular">
+                <font>
+                    <Font name="Segoe UI Semilight"/>
+                </font>
+                <VBox.margin>
+                    <Insets top="8"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </Label>
+    
+            <TextField fx:id="cotitularTxt"
+                       minWidth="290">
+                <VBox.margin>
+                    <Insets top="5"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </TextField>
+            
+            <Label text="ID identificación">
+                <font>
+                    <Font name="Segoe UI Semilight"/>
+                </font>
+                <VBox.margin>
+                    <Insets top="8"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </Label>
+    
+            <TextField fx:id="idClienteTxt"
+                       minWidth="290">
+                <VBox.margin>
+                    <Insets top="5"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </TextField>
+            
+            <Label text="Tipo de Identificación">
+                <font>
+                    <Font name="Segoe UI Semilight"/>
+                </font>
+                <VBox.margin>
+                    <Insets top="8"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </Label>
+    
+            <ComboBox fx:id="tipoIdClienteCmb"
+                      minWidth="330"
+                      style="-fx-background-color: white;" >
+                <VBox.margin>
+                    <Insets top="5"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </ComboBox>
+            
+        </VBox>
+    </center>    
+    
+    <right>
+        <VBox style="-fx-background-color: white" >
+            <StackPane>
+                <JFXButton fx:id="editarClienteBtn"
+                           text="Editar"
+                           StackPane.alignment="CENTER_RIGHT"
+                           style="-fx-background-color:#EEEBEB;" >
+                           
+                </JFXButton>
+                <VBox.margin>
+                    <Insets top="90"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </StackPane>
+            <ListView maxWidth="330" >
+                <VBox.margin>
+                    <Insets top="5"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </ListView>
+        </VBox>
+    </right>
+</BorderPane>
