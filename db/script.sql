@@ -170,7 +170,7 @@ ENGINE = InnoDB;
 -- Table `empenofacil`.`transaccioncaja`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `empenofacil`.`transaccioncaja` (
-  `idtransaccioncaja` INT NOT NULL AUTO_INCREMENT,
+  `idtransaccioncaja` INT NOT NULL,
   `sucursal` INT NOT NULL,
   `cancelacion` INT NULL,
   `monto` DECIMAL(15,2) NOT NULL,
@@ -290,10 +290,10 @@ ENGINE = InnoDB;
 -- Table `empenofacil`.`articulo`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `empenofacil`.`articulo` (
-  `idarticulo` INT NOT NULL,
+  `idarticulo` INT NOT NULL AUTO_INCREMENT,
   `prenda` INT NOT NULL,
   `empleado` INT NOT NULL,
-  `comercializacion` DATETIME NOT NULL,
+  `comercializacion` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `precio` DECIMAL(15,2) NOT NULL,
   `descuento` DECIMAL(15,2) NOT NULL,
   `codigodebarras` VARCHAR(100) NOT NULL,
