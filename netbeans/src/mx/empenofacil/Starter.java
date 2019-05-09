@@ -20,7 +20,7 @@ public class Starter extends Application{
     
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(Starter.class.getResource("/mx/empenofacil/gui/Home.fxml"));
+        Parent root = FXMLLoader.load(Starter.class.getResource("/mx/empenofacil/gui/InicioSesion.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         HomeController.setStage(primaryStage);

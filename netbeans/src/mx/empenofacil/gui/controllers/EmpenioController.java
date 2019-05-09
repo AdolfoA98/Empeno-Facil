@@ -7,8 +7,6 @@ package mx.empenofacil.gui.controllers;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,91 +17,51 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import mx.empenofacil.dao.ClienteDAO;
 import mx.empenofacil.beans.Cliente;
 import mx.empenofacil.beans.Empleado;
-import mx.empenofacil.dao.ClienteDAO;
-import mx.empenofacil.gui.tools.Loader;
 
 /**
  * FXML Controller class
  *
- * @author adolf
+ * @author Rainbow Dash
  */
-public class RegistrarEmpenoController implements Initializable {
-
-    private static List<Image> fotosPrenda;
-    private static List<Image> fotosCliente;
-
-    public static void addPhoto(Image foto, String tipoFoto) {
-        switch (tipoFoto) {
-            case "prenda":
-                if (fotosPrenda == null) {
-                    fotosPrenda = new ArrayList<>();
-                    fotosPrenda.add(foto);
-                } else if (fotosPrenda.size() >= 4) {
-                    fotosPrenda.set(3, foto);
-                } else {
-                    fotosPrenda.add(foto);
-                }
-                break;
-            case "cliente":
-                if (fotosCliente == null) {
-                    fotosCliente = new ArrayList<>();
-                    fotosCliente.add(foto);
-                } else if (fotosCliente.size() >= 3) {
-                    fotosCliente.set(2, foto);
-                } else {
-                    fotosCliente.add(foto);
-                }
-                break;
-        }
-    }
+public class EmpenioController implements Initializable {
 
     @FXML
-    private Button tomarFotoPrendaBtn;
-
-    @FXML
-    private ImageView fotoClienteView1;
-
+    private Pane infoCliente;
     @FXML
     private TextField nombreCliente;
-
     @FXML
     private TextField apellidoCliente;
-
     @FXML
     private TextField curp;
-
     @FXML
     private TextField rfc;
-
     @FXML
     private TextField identificacion;
-
     @FXML
     private Button agregar;
-
     @FXML
     private Button editar;
-
     @FXML
     private TextField curpBusqueda;
-
     @FXML
     private Button buscar;
 
     private Empleado empleadoSesion;
     private Cliente cliente = null;
+    @FXML
+    private Button regresar;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        // TODO
     }
 
     public void initData(Empleado empleadoSesion) {
@@ -122,21 +80,35 @@ public class RegistrarEmpenoController implements Initializable {
     }
 
     @FXML
-    public void tomarFotoPrenda() {
-        CamaraController.setTipoFoto("prenda");
-        abrirCamara();
+    private void agregar(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/mx/empenofacil/gui/FormularioClientes.fxml"));
+        Parent ejemplo = loader.load();
+        Scene ejemploEscena = new Scene(ejemplo);
+
+        FormularioClientesController controller = loader.getController();
+        controller.initData(empleadoSesion);
+
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(ejemploEscena);
+        window.show();
     }
 
     @FXML
-    public void tomarFotoCliente() {
-        CamaraController.setTipoFoto("cliente");
-        abrirCamara();
-    }
+    private void editar(ActionEvent event) throws IOException {
+        if (cliente != null) {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/mx/empenofacil/gui/FormularioClientes.fxml"));
+            Parent ejemplo = loader.load();
+            Scene ejemploEscena = new Scene(ejemplo);
 
-    private void abrirCamara() {
-        Stage stage = (Stage) this.tomarFotoPrendaBtn.getScene().getWindow();
-        Loader.loadAsParent(HomeController.getStage(), "/mx/empenofacil/gui/Camara.fxml", "Cámara");
-        stage.close();
+            FormularioClientesController controller = loader.getController();
+            controller.initDataActualizacion(empleadoSesion, cliente);
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(ejemploEscena);
+            window.show();
+        }
     }
 
     @FXML
@@ -159,41 +131,18 @@ public class RegistrarEmpenoController implements Initializable {
     }
 
     @FXML
-    private void agregar(ActionEvent event) throws IOException {
+    private void regresar(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/mx/empenofacil/gui/FormularioClientes.fxml"));
+        loader.setLocation(getClass().getResource("/mx/empenofacil/gui/MenuPrincipal.fxml"));
         Parent ejemplo = loader.load();
         Scene ejemploEscena = new Scene(ejemplo);
 
-        FormularioClientesController controller = loader.getController();
+        MenuPrincipalController controller = loader.getController();
         controller.initData(empleadoSesion);
 
-        Stage stage = new Stage();
-        stage.setScene(ejemploEscena);
-        stage.show();
-
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.close();
-    }
-
-    @FXML
-    private void editar(ActionEvent event) throws IOException {
-        if (cliente != null) {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/mx/empenofacil/gui/FormularioClientes.fxml"));
-            Parent ejemplo = loader.load();
-            Scene ejemploEscena = new Scene(ejemplo);
-
-            FormularioClientesController controller = loader.getController();
-            controller.initDataActualizacion(empleadoSesion, cliente);
-
-            Stage stage = new Stage();
-            stage.setScene(ejemploEscena);
-            stage.show();
-
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            window.close();
-        }
+        window.setScene(ejemploEscena);
+        window.show();
     }
 
 }

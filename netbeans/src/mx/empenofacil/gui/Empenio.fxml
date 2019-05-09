@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mx.empenofacil.gui.controllers.EmpenioController">
+    <children>
+    <Pane fx:id="infoCliente" layoutX="14.0" layoutY="100.0" prefHeight="200.0" prefWidth="775.0">
+      <children>
+        <Label layoutX="14.0" layoutY="14.0" text="Nombre del cliente" />
+        <Label layoutX="14.0" layoutY="42.0" text="Apellidos del cliente" />
+        <Label layoutX="14.0" layoutY="70.0" text="CURP" />
+        <Label layoutX="14.0" layoutY="100.0" text="RFC" />
+        <Label layoutX="14.0" layoutY="134.0" text="Identificación" />
+        <TextField id="nombre" fx:id="nombreCliente" editable="false" layoutX="168.0" layoutY="11.0" prefWidth="200.0" />
+        <TextField id="apellido" fx:id="apellidoCliente" editable="false" layoutX="168.0" layoutY="39.0" prefWidth="200.0" />
+        <TextField fx:id="curp" editable="false" layoutX="168.0" layoutY="67.0" prefWidth="200.0" />
+        <TextField fx:id="rfc" editable="false" layoutX="168.0" layoutY="97.0" prefWidth="200.0" />
+        <TextField fx:id="identificacion" editable="false" layoutX="168.0" layoutY="129.0" prefWidth="200.0" />
+      </children>
+    </Pane>
+    <Button fx:id="agregar" layoutX="506.0" layoutY="56.0" mnemonicParsing="false" onAction="#agregar" text="Agregar Cliente" />
+    <Button fx:id="editar" disable="true" layoutX="657.0" layoutY="56.0" mnemonicParsing="false" onAction="#editar" text="Editar Cliente" />
+    <TextField id="curp" fx:id="curpBusqueda" layoutX="25.0" layoutY="56.0" prefWidth="293.0" promptText="CURP" />
+    <Button fx:id="buscar" layoutX="318.0" layoutY="56.0" mnemonicParsing="false" onAction="#buscar" text="Buscar Cliente" />
+      <Button fx:id="regresar" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#regresar" text="Regresar" />
+  </children>
+</AnchorPane>

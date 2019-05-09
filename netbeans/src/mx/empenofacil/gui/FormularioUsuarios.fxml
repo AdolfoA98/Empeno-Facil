@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="440.0" prefWidth="529.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mx.empenofacil.gui.controllers.FormularioUsuariosController">
+    <children>
+        <Label layoutX="63.0" layoutY="48.0" text="Nombre del Empleado" />
+        <Label layoutX="64.0" layoutY="189.0" text="Nombre de Usuario" />
+        <Label layoutX="63.0" layoutY="233.0" text="Contraseña" />
+        <Label layoutX="61.0" layoutY="280.0" text="Número de Personal" />
+        <Label layoutX="58.0" layoutY="329.0" text="Tipo de Empleado" />
+        <TextField fx:id="nombreEmpleado" layoutX="248.0" layoutY="43.0" onKeyTyped="#validarNombre" prefWidth="200.0" />
+        <TextField fx:id="nombreUsuario" layoutX="248.0" layoutY="184.0" onKeyTyped="#validarNombreUsuario" prefWidth="200.0" />
+        <TextField fx:id="contrasenia" layoutX="248.0" layoutY="228.0" onKeyTyped="#validarContrasenia" prefWidth="200.0" />
+        <TextField fx:id="numeroPersonal" layoutX="248.0" layoutY="275.0" prefWidth="200.0" />
+        <Button fx:id="cancelar" layoutX="112.0" layoutY="388.0" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
+        <Button fx:id="guardar" layoutX="348.0" layoutY="388.0" mnemonicParsing="false" onAction="#guardar" text="Guardar" />
+      <ComboBox fx:id="box_tipoEmpleado" layoutX="248.0" layoutY="324.0" prefHeight="31.0" prefWidth="200.0" />
+      <ComboBox fx:id="box_sucursal" layoutX="248.0" layoutY="131.0" prefHeight="31.0" prefWidth="200.0" />
+      <Label layoutX="64.0" layoutY="136.0" text="Sucursal" />
+      <Label layoutX="61.0" layoutY="92.0" text="Apellidos" />
+      <TextField fx:id="txt_apellidos" layoutX="248.0" layoutY="87.0" prefHeight="31.0" prefWidth="200.0" />
+    </children>
+</AnchorPane>

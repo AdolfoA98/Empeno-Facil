@@ -20,6 +20,7 @@ public class Prenda {
     private String nombre;
     private String descripcion;
     private Double peso;
+    private Boolean comercializado;
 
     /**
      * @return the idprenda
@@ -145,6 +146,14 @@ public class Prenda {
      */
     public void setPeso(Double peso) {
         this.peso = peso;
+    }
+    
+    public Boolean getComercializado() {
+        return comercializado;
+    }
+
+    public void setComercializado(Boolean comercializado) {
+        this.comercializado = comercializado;
     }
     
     

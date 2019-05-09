@@ -6,6 +6,7 @@
 package mx.empenofacil.beans;
 
 import java.sql.Date;
+import java.util.List;
 
 /**
  *
@@ -23,6 +24,7 @@ public class Empeno {
     private Double interes;
     private Double almacenaje;
     private String nombrecotitular;
+    private List<Prenda> prendas;
 
     /**
      * @return the idempeno
@@ -162,6 +164,14 @@ public class Empeno {
      */
     public void setNombrecotitular(String nombrecotitular) {
         this.nombrecotitular = nombrecotitular;
+    }
+    
+    public List<Prenda> getPrendas() {
+        return prendas;
+    }
+
+    public void setPrendas(List<Prenda> prendas) {
+        this.prendas = prendas;
     }
     
 }

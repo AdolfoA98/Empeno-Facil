@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.VBox?>
+
+<fx:root fx:id="accordion" maxHeight="1.7976931348623157E308" prefHeight="60.0" prefWidth="600.0" type="Accordion" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+  <panes>
+    <TitledPane fx:id="container" animated="false" collapsible="false" expanded="false" maxHeight="1.7976931348623157E308" text="xxx">
+         <content>
+            <VBox fx:id="prendas" maxHeight="1.7976931348623157E308" />
+         </content></TitledPane>
+  </panes>
+</fx:root>

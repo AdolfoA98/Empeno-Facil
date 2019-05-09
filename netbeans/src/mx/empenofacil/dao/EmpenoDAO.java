@@ -6,6 +6,7 @@
 package mx.empenofacil.dao;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mx.empenofacil.beans.Empeno;
@@ -17,19 +18,39 @@ import org.apache.ibatis.session.SqlSession;
  * @author adolf
  */
 public class EmpenoDAO {
-    
-    public static boolean registrarEmpeno(Empeno empeno){
+
+    public static List<Empeno> getTodos() {
+        List<Empeno> resultado = null;
+        try (SqlSession session = MyBatisUtils.getSession()) {
+            resultado = session.selectList("empeno.todos");
+        } catch (IOException ex) {
+            Logger.getLogger(EmpenoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resultado;
+    }
+
+    public static boolean registrarEmpeno(Empeno empeno) {
         boolean completado = true;
-        
-        try (SqlSession conn = MyBatisUtils.getSession()){
+
+        try (SqlSession conn = MyBatisUtils.getSession()) {
             conn.insert("registrarEmpeno", empeno);
             conn.commit();
         } catch (IOException ex) {
             Logger.getLogger(EmpenoDAO.class.getName()).log(Level.SEVERE, null, ex);
             completado = false;
         }
-        
+
         return completado;
     }
     
+    public static List<Empeno> getVencidosNoComercializados() {
+        List<Empeno> resultado = null;
+        try (SqlSession session = MyBatisUtils.getSession()) {
+            resultado = session.selectList("empeno.vencidosNoComercializados");
+        } catch (IOException ex) {
+            Logger.getLogger(EmpenoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resultado;
+    }
+
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mx.empenofacil.gui.controllers.AdministrarUsuarioController">
+    <children>
+    <Button fx:id="agregar" disable="false" layoutX="82.0" layoutY="67.0" mnemonicParsing="false" onAction="#agregarUsuario" text="Agregar" />
+    <Button fx:id="editar" disable="true" layoutX="265.0" layoutY="67.0" mnemonicParsing="false" onAction="#editarUsuario" text="Editar" />
+    <Button fx:id="eliminar" disable="true" layoutX="464.0" layoutY="68.0" mnemonicParsing="false" onAction="#eliminarUsuario" text="Eliminar" />
+      <Button fx:id="regresar" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#regresar" text="Regresar" />
+      <TableView fx:id="tb_empleados" editable="true" layoutX="19.0" layoutY="125.0" onMouseClicked="#seleccionEmpleado" prefHeight="263.0" prefWidth="559.0">
+        <columns>
+          <TableColumn fx:id="col_numeroPersonal" prefWidth="158.0" text="Número de personal" />
+          <TableColumn fx:id="col_nombreEmpleado" maxWidth="191.0" prefWidth="171.0" text="Nombre" />
+            <TableColumn fx:id="col_apellidos" prefWidth="229.0" text="Apellidos" />
+        </columns>
+      </TableView>
+  </children>
+</AnchorPane>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Cliente">
+    <insert id="registrarCliente" parameterType="map">
+        INSERT INTO empenofacil.cliente (nombres, apellidos, rfc, curp, identificacion, tipoidentificacion) 
+        VALUES (#{nombres},#{apellidos},#{rfc},#{curp},#{identificacion},#{tipoidentificacion});
+    </insert>
+    
+    <update id="actualizarCliente" parameterType="map">
+        UPDATE empenofacil.cliente SET nombres = #{nombres}, apellidos = #{apellidos}, rfc = #{rfc}, curp = #{curp},
+        identificacion = #{identificacion}, tipoidentificacion = #{tipoidentificacion} 
+        WHERE idcliente = #{idcliente};
+    </update>
+    
+    <select id="buscarClienteCURP" resultType="mx.empenofacil.beans.Cliente" parameterType="string">
+        SELECT * FROM empenofacil.cliente WHERE curp = #{curp};
+    </select>
+    
+    <select id="obtenerTiposIdentificacion" resultType="mx.empenofacil.beans.ItemCatalogo">
+        SELECT * FROM empenofacil.itemcatalogo WHERE itemcatalogoSuperior = 2;
+    </select>
+</mapper>

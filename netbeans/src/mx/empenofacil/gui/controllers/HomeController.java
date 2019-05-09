@@ -6,21 +6,29 @@ package mx.empenofacil.gui.controllers;
  * and open the template in the editor.
  */
 import com.jfoenix.controls.JFXButton;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import mx.empenofacil.beans.Empleado;
 import mx.empenofacil.dao.BolsaDAO;
 import mx.empenofacil.gui.tools.Loader;
 
@@ -31,18 +39,23 @@ import mx.empenofacil.gui.tools.Loader;
 public class HomeController implements Initializable {
 
     private static Stage stage;
+    private static Empleado empleado;
+
+    public static void setEmpleado(Empleado emp) {
+        empleado = emp;
+    }
 
     public static void setStage(Stage stg) {
         stage = stg;
     }
-    
-    public static Stage getStage(){
+
+    public static Stage getStage() {
         return stage;
     }
 
     @FXML
     private BorderPane mainPane;
-    
+
     @FXML
     private ToolBar sectionTools;
 
@@ -106,7 +119,7 @@ public class HomeController implements Initializable {
         this.inicializarListas();
         cambiarToolBarAVenta();
         actualizarMontoCaja();
-        
+
         PuntoVentaController page = new PuntoVentaController();
         mainPane.setCenter(page.getMainPane());
     }
@@ -114,10 +127,33 @@ public class HomeController implements Initializable {
     private void inicializarTools() {
 
         //Administración
-        this.registrarUsuarioBtn = new JFXButton("\nRegistrar usuario");
-        this.registrarUsuarioBtn.setFont(Font.font("Segoe MDL2 Assets"));
-        this.usuariosBtn = new JFXButton("\nUsuario");
+        this.usuariosBtn = new JFXButton("\nUsuarios");
         this.usuariosBtn.setFont(Font.font("Segoe MDL2 Assets"));
+        this.usuariosBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("/mx/empenofacil/gui/AdministrarUsuario.fxml"));
+                    Parent ejemplo = loader.load();
+                    Scene ejemploEscena = new Scene(ejemplo);
+                    
+                    AdministrarUsuarioController controller = loader.getController();
+                    controller.initData(empleado);
+                    
+                    Stage window = new Stage();
+                    window.setScene(ejemploEscena);
+                    window.setTitle("Usuarios");
+                    window.initOwner(stage);
+                    window.initModality(Modality.APPLICATION_MODAL);
+                    window.show();
+                } catch (IOException ex) {
+                    Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        });
+
         this.registrarCajaBtn = new JFXButton("\nRegistrar monto en caja");
         this.registrarCajaBtn.setFont(Font.font("Segoe MDL2 Assets"));
         this.registrarCajaBtn.setOnAction(new EventHandler<ActionEvent>() {
@@ -144,22 +180,52 @@ public class HomeController implements Initializable {
         });
         this.registrarRefrendoBtn = new JFXButton("\nRegistrar refrendo");
         this.registrarRefrendoBtn.setFont(Font.font("Segoe MDL2 Assets"));
+
         this.registrarReempenoBtn = new JFXButton("\nRegistrar reempeño");
         this.registrarReempenoBtn.setFont(Font.font("Segoe MDL2 Assets"));
+
         this.listaNegraBtn = new JFXButton("\nLista negra");
         this.listaNegraBtn.setFont(Font.font("Segoe MDL2 Assets"));
+        this.listaNegraBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Stage nuevoStage = new Stage();
+                nuevoStage.setTitle("Lista negra");
+                nuevoStage.setScene(new Scene(new ListaNegraAdmin(empleado)));
+                nuevoStage.initOwner(stage);
+                nuevoStage.initModality(Modality.APPLICATION_MODAL);
+                nuevoStage.show();
+            }
+
+        });
+
         this.articulosBtn = new JFXButton("\nArtículos");
         this.articulosBtn.setFont(Font.font("Segoe MDL2 Assets"));
+
         this.apartarBtn = new JFXButton("\nApartar artículo");
         this.apartarBtn.setFont(Font.font("Segoe MDL2 Assets"));
 
         //Historial de operaciones
         this.apartadosBtn = new JFXButton("\nApartados");
         this.apartadosBtn.setFont(Font.font("Segoe MDL2 Assets"));
+
         this.ventasBtn = new JFXButton("\nVentas");
         this.ventasBtn.setFont(Font.font("Segoe MDL2 Assets"));
+
         this.contratosBtn = new JFXButton("\nContratos");
         this.contratosBtn.setFont(Font.font("Segoe MDL2 Assets"));
+        this.contratosBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Stage nuevoStage = new Stage();
+                nuevoStage.setTitle("Empeños Vencidos");
+                nuevoStage.setScene(new Scene(new EmpenosVencidos(empleado)));
+                nuevoStage.initOwner(stage);
+                nuevoStage.initModality(Modality.APPLICATION_MODAL);
+                nuevoStage.show();
+            }
+
+        });
 
         //Reportes
         this.operacionesBtn = new JFXButton("\nReporte diario de operaciones");
@@ -180,7 +246,6 @@ public class HomeController implements Initializable {
 
         //Sección de administración
         adminList = new ArrayList<>();
-        adminList.add(this.registrarUsuarioBtn);
         adminList.add(this.usuariosBtn);
         adminList.add(this.registrarCajaBtn);
 

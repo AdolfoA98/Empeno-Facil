@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Empleado">
+    <insert id="registrarEmpleado" parameterType="map">
+        INSERT INTO empenofacil.empleado (sucursal,numpersonal,nombres,apellidos,contrasenahash,tipoempleado, nombreusuario) 
+        VALUES (#{sucursal},#{numpersonal},#{nombres},#{apellidos},#{contrasenahash},#{tipoempleado},#{nombreusuario});
+    </insert>
+    
+    <update id="actualizarEmpleado" parameterType="map">
+        UPDATE empenofacil.empleado SET sucursal = #{sucursal}, nombres = #{nombres}, apellidos = #{apellidos}, contrasenahash = #{contrasenahash}, tipoempleado = #{tipoempleado},
+        nombreusuario = #{nombreusuario} WHERE numpersonal = #{numpersonal};
+    </update>
+    
+    <delete id="eliminarEmpleado" parameterType="string">
+        DELETE FROM empenofacil.empleado WHERE numpersonal = #{numpersonal};
+    </delete>
+    
+    <select id="numerosPersonal" resultType="string">
+        SELECT numpersonal FROM empenofacil.empleado;
+    </select>
+    
+    <select id="nombresUsuario" resultType="string">
+        SELECT nombreusuario FROM empenofacil.empleado;
+    </select>
+    
+    <select id="obtenerTodo" resultType="mx.empenofacil.beans.Empleado">
+        SELECT * FROM empenofacil.empleado;
+    </select>
+    
+    <select id="obtenerTipoEmpleado" resultType="mx.empenofacil.beans.ItemCatalogo">
+        SELECT * FROM empenofacil.itemcatalogo WHERE itemcatalogoSuperior = 1;
+    </select>
+    
+    <select id="obtenerSucursales" resultType="mx.empenofacil.beans.Sucursal">
+        SELECT * FROM empenofacil.sucursal;
+    </select>
+</mapper>
