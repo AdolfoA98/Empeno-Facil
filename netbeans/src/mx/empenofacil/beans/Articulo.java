@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 public class Articulo {
     
     private Integer idArticulo;
-    private Prenda prenda;
+    private Prenda2 prenda;
     private Empleado empleado;
     private LocalDateTime comercializacion;
     private BigDecimal precio;
@@ -26,11 +26,11 @@ public class Articulo {
         this.idArticulo = idArticulo;
     }
 
-    public Prenda getPrenda() {
+    public Prenda2 getPrenda() {
         return prenda;
     }
 
-    public void setPrenda(Prenda prenda) {
+    public void setPrenda(Prenda2 prenda) {
         this.prenda = prenda;
     }
 

@@ -48,7 +48,7 @@ public class AgregarRegistroListaNegra extends VBox implements Initializable {
         this.empleado = empleado;
         
         FXMLLoader fxmlLoader = new FXMLLoader(getClass()
-                .getResource("/empenofacil/resources/fxml/AgregarRegistroListaNegra.fxml"));
+                .getResource("/mx/empenofacil/gui/AgregarRegistroListaNegra.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 

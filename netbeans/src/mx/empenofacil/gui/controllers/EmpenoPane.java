@@ -1,9 +1,9 @@
 package mx.empenofacil.gui.controllers;
 
 import mx.empenofacil.beans.Articulo;
-import mx.empenofacil.beans.Empeno;
+import mx.empenofacil.beans.Empeño2;
 import mx.empenofacil.beans.Empleado;
-import mx.empenofacil.beans.Prenda;
+import mx.empenofacil.beans.Prenda2;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
@@ -24,7 +24,7 @@ import javafx.scene.layout.VBox;
 
 public class EmpenoPane extends Accordion implements Initializable {
     
-    private Empeno empeno;
+    private Empeño2 empeno;
     
     @FXML
     private Accordion accordion;
@@ -35,7 +35,7 @@ public class EmpenoPane extends Accordion implements Initializable {
     @FXML
     private VBox prendas;
 
-    public EmpenoPane(Empeno empeno) {
+    public EmpenoPane(Empeño2 empeno) {
         this.empeno = empeno;
         
         FXMLLoader fxmlLoader = new FXMLLoader(getClass()
@@ -53,14 +53,14 @@ public class EmpenoPane extends Accordion implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         LocalDateTime fechaHoy = LocalDateTime.now();
-        long diasPasados = ChronoUnit.DAYS.between(empeno.getFechaextendida().toLocalDate(), fechaHoy);
+        long diasPasados = 0;//ChronoUnit.DAYS.between(empeno.getFechaExtendida().toLocalDate(), fechaHoy);
         
         container.setText(String.format("Contrato ID (%d) %d días vencido",
-                empeno.getIdempeno(),
+                empeno.getIdEmpeño(),
                 diasPasados
         ));
         
-        for (Prenda prenda : empeno.getPrendas()) {
+        for (Prenda2 prenda : empeno.getPrendas()) {
             prendas.getChildren().add(new PrendaPane(prenda));
         }
         accordion.setExpandedPane(container);

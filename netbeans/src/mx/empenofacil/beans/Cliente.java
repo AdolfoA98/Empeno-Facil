@@ -18,7 +18,16 @@ public class Cliente {
     private String curp;
     private String identificacion;
     private Integer tipoidentificacion;
+    private ItemCatalogo tipoIdentificacion;
     private Boolean enListaNegra;
+
+    public ItemCatalogo getTipoIdentificacion() {
+        return tipoIdentificacion;
+    }
+
+    public void setTipoIdentificacion(ItemCatalogo tipoIdentificacion) {
+        this.tipoIdentificacion = tipoIdentificacion;
+    }
 
     public Cliente() {
     }

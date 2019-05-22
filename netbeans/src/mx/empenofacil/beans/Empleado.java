@@ -18,6 +18,15 @@ public class Empleado {
     private String contrasenahash;
     private Integer tipoempleado;
     private String nombreusuario;
+    private ItemCatalogo tipoEmpleado;
+
+    public ItemCatalogo getTipoEmpleado() {
+        return tipoEmpleado;
+    }
+
+    public void setTipoEmpleado(ItemCatalogo tipoEmpleado) {
+        this.tipoEmpleado = tipoEmpleado;
+    }
 
     public Empleado() {
     }

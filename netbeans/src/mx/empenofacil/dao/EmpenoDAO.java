@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mx.empenofacil.beans.Empeno;
+import mx.empenofacil.beans.Empeño2;
 import mx.empenofacil.mybatis.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
 
@@ -43,8 +44,8 @@ public class EmpenoDAO {
         return completado;
     }
     
-    public static List<Empeno> getVencidosNoComercializados() {
-        List<Empeno> resultado = null;
+    public static List<Empeño2> getVencidosNoComercializados() {
+        List<Empeño2> resultado = null;
         try (SqlSession session = MyBatisUtils.getSession()) {
             resultado = session.selectList("empeno.vencidosNoComercializados");
         } catch (IOException ex) {
