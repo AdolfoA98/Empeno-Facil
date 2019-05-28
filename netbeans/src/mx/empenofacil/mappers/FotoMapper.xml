@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Foto">
+    
+    <insert id="agregarFoto" parameterType="mx.empenofacil.beans.Foto">
+        INSERT INTO fotografia VALUES (
+            #{idfotografia},
+            #{img},
+            #{nota}
+        );
+    </insert>
+    
+    <insert id="relacionarFotoPrenda" parameterType="mx.empenofacil.beans.Foto">
+        INSERT INTO fotografiaprenda VALUES (
+            #{iddueno},
+            #{idfotografia}
+        );
+    </insert>
+    
+    <insert id="relacionarFotoCliente" parameterType="mx.empenofacil.beans.Foto">
+        INSERT INTO fotografiacliente VALUES (
+            #{iddueno},
+            #{idfotografia}
+        );
+    </insert>
+    
+</mapper>

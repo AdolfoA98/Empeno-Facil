@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="listaNegra">
+    
+    <resultMap id="registroListaNegraMap" type="mx.empenofacil.beans.RegistroListaNegra">
+        <id column="idregistrolistanegra" property="idRegistroListaNegra"/>
+        <association column="cliente" property="cliente" select="cliente.buscarPorId"/>
+        <association column="empleadoagrega" property="empleadoAgrega" select="empleado.buscarPorId"/>
+        <association column="empleadoretira" property="empleadoRetira" select="empleado.buscarPorId"/>
+    </resultMap>
+    
+    <select id="tieneRegistroActivo" resultType="boolean" parameterType="int">
+        SELECT COUNT(1) <![CDATA[ > ]]> 0
+        FROM empenofacil.registrolistanegra
+        WHERE cliente = #{idCliente}
+        AND fechaRetira IS NULL
+    </select>
+    
+    <select id="todos" resultMap="registroListaNegraMap">
+        SELECT *
+        FROM empenofacil.registrolistanegra;
+    </select>
+    
+    <select id="todosActivos" resultMap="registroListaNegraMap">
+        SELECT *
+        FROM empenofacil.registrolistanegra
+        WHERE fechaRetira IS NULL;
+    </select>
+    
+    <select id="recientes" resultMap="registroListaNegraMap" parameterType="int">
+        SELECT *
+        FROM empenofacil.registrolistanegra
+        ORDER BY idregistrolistanegra DESC
+        LIMIT #{cantidad};
+    </select>
+    
+    <select id="recientesActivos" resultMap="registroListaNegraMap" parameterType="int">
+        SELECT *
+        FROM empenofacil.registrolistanegra
+        WHERE fechaRetira IS NULL
+        ORDER BY idregistrolistanegra DESC
+        LIMIT #{cantidad};
+    </select>
+    
+    <select id="deCliente" resultMap="registroListaNegraMap" parameterType="map">
+        SELECT *
+        FROM empenofacil.registrolistanegra
+        WHERE cliente = #{idCliente}
+        ORDER BY idregistrolistanegra DESC
+        LIMIT #{cantidad};
+    </select>
+    
+    <select id="deClienteActivos" resultMap="registroListaNegraMap" parameterType="map">
+        SELECT *
+        FROM empenofacil.registrolistanegra
+        WHERE cliente = #{idCliente}
+        AND fechaRetira IS NULL
+        ORDER BY idregistrolistanegra DESC
+        LIMIT #{cantidad};
+    </select>
+    
+    <insert id="agregar" parameterType="map">
+        INSERT INTO empenofacil.registrolistanegra
+        (cliente,empleadoAgrega,motivoAgrega)
+        VALUES(#{idCliente},#{idEmpleado},#{motivo});
+    </insert>
+    
+    <update id="retirar" parameterType="map">
+        UPDATE empenofacil.registrolistanegra
+        SET
+            empleadoRetira = #{idEmpleado},
+            motivoRetira = #{motivo}
+        WHERE idregistrolistanegra = #{id};
+    </update>
+    
+</mapper>

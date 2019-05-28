@@ -14,7 +14,7 @@ JFXButton {
     -fx-text-alignment: center;
 }
 
-TextField, PasswordField, ComboBox {
+TextField, PasswordField, TextArea, ComboBox {
     -fx-border-radius: 0em;
     -fx-border-color: #707070;
     -fx-background-radius: 0em;

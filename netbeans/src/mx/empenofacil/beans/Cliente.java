@@ -5,6 +5,9 @@
  */
 package mx.empenofacil.beans;
 
+import java.util.List;
+import javafx.scene.image.Image;
+
 /**
  *
  * @author Rainbow Dash
@@ -19,6 +22,7 @@ public class Cliente {
     private String identificacion;
     private Integer tipoidentificacion;
     private Boolean enListaNegra;
+    private List<Image> fotos;
 
     public Cliente() {
     }
@@ -89,6 +93,20 @@ public class Cliente {
 
     public void setEnListaNegra(Boolean enListaNegra) {
         this.enListaNegra = enListaNegra;
+    }
+
+    /**
+     * @return the fotos
+     */
+    public List<Image> getFotos() {
+        return fotos;
+    }
+
+    /**
+     * @param fotos the fotos to set
+     */
+    public void setFotos(List<Image> fotos) {
+        this.fotos = fotos;
     }
     
 }

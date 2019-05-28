@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="empeno">
+    
+    <resultMap id="empenoMap" type="mx.empenofacil.beans.Empeno">
+        <id column="idempeno" property="idempeno"/>
+        <association column="empleado" property="empleado" select="empleado.buscarPorId"/>
+        <association column="cliente" property="cliente" select="cliente.buscarPorId"/>
+        <association column="transaccioncaja" property="transaccionCaja" select="transaccion.buscarPorId"/>
+        <collection column="idempeno" property="prendas" select="prenda.buscarPorEmpeno"/>
+    </resultMap>
+    
+    <select id="todos" resultMap="empenoMap">
+        SELECT *
+        FROM empenofacil.empenoview;
+    </select>
+    
+    <select id="vencidosNoComercializados" resultMap="empenoMap">
+        SELECT *
+        FROM empenofacil.empenoview
+        WHERE vencido = TRUE
+        AND comercializado = FALSE
+        AND cancelado = FALSE;
+    </select>
+    
+</mapper>

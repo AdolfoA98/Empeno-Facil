@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
     
     <insert id="registrarEmpeno" parameterType="mx.empenofacil.beans.Empeno">
-        INSERT INTO empeno VALUES (
+        INSERT INTO empenoview VALUES (
             #{idempeno},
             #{empleado},
             #{cliente},
@@ -42,6 +42,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{interes},
             #{almacenaje},
             #{nombrecotitular}
+            #{extendido},
+            #{vencido},
+            #{cancelado},
+            #{comercializado}
         );
     </insert>
     

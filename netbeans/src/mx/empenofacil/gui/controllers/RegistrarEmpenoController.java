@@ -10,6 +10,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,13 +23,16 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import mx.empenofacil.beans.Cliente;
 import mx.empenofacil.beans.Empleado;
+import mx.empenofacil.beans.Prenda;
 import mx.empenofacil.dao.ClienteDAO;
+import mx.empenofacil.dao.PrendaDAO;
 import mx.empenofacil.gui.tools.Loader;
 
 /**
@@ -34,39 +42,37 @@ import mx.empenofacil.gui.tools.Loader;
  */
 public class RegistrarEmpenoController implements Initializable {
 
+    private static ObjectProperty<Image> imageProperty = new SimpleObjectProperty<>();
+
     private static List<Image> fotosPrenda;
     private static List<Image> fotosCliente;
+    private static ObservableList<Prenda> listaPrendas;
 
-    public static void addPhoto(Image foto, String tipoFoto) {
-        switch (tipoFoto) {
-            case "prenda":
-                if (fotosPrenda == null) {
-                    fotosPrenda = new ArrayList<>();
-                    fotosPrenda.add(foto);
-                } else if (fotosPrenda.size() >= 4) {
-                    fotosPrenda.set(3, foto);
-                } else {
-                    fotosPrenda.add(foto);
-                }
-                break;
-            case "cliente":
-                if (fotosCliente == null) {
-                    fotosCliente = new ArrayList<>();
-                    fotosCliente.add(foto);
-                } else if (fotosCliente.size() >= 3) {
-                    fotosCliente.set(2, foto);
-                } else {
-                    fotosCliente.add(foto);
-                }
-                break;
+    public static void addPhoto(Image foto) {
+        if (fotosCliente == null) {
+            fotosCliente = new ArrayList<>();
+            fotosCliente.add(foto);
+            imageProperty.set(foto);
+        } else if (fotosCliente.size() >= 3) {
+            fotosCliente.set(2, foto);
+        } else {
+            fotosCliente.add(foto);
         }
     }
 
-    @FXML
-    private Button tomarFotoPrendaBtn;
+    public static void agregarPrenda(Prenda prenda) {
+        listaPrendas.add(prenda);
+    }
+
+    public static void editarPrendaListada(Prenda prendaEditada, int index) {
+        listaPrendas.set(index, prendaEditada);
+    }
 
     @FXML
-    private ImageView fotoClienteView1;
+    private Button tomarFotoClienteBtn;
+
+    @FXML
+    private ImageView fotoClienteView;
 
     @FXML
     private TextField nombreCliente;
@@ -95,14 +101,32 @@ public class RegistrarEmpenoController implements Initializable {
     @FXML
     private Button buscar;
 
+    @FXML
+    private TableView prendasView;
+
     private Empleado empleadoSesion;
     private Cliente cliente = null;
+    private boolean editarCliente;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        editarCliente = false;
+
+        if (listaPrendas == null) {
+            List<Prenda> lista = new ArrayList<>();
+            listaPrendas = FXCollections.observableList(lista);
+        }
+
+        prendasView.setItems(listaPrendas);
+
+        Image image = new Image("/mx/empenofacil/imagenes/default.png");
+        imageProperty.set(image);
+
+        Bindings.bindBidirectional(fotoClienteView.imageProperty(), imageProperty);
 
     }
 
@@ -122,21 +146,23 @@ public class RegistrarEmpenoController implements Initializable {
     }
 
     @FXML
-    public void tomarFotoPrenda() {
-        CamaraController.setTipoFoto("prenda");
-        abrirCamara();
-    }
-
-    @FXML
     public void tomarFotoCliente() {
         CamaraController.setTipoFoto("cliente");
         abrirCamara();
     }
 
+    @FXML
+    public void verFotos() {
+        if (fotosCliente != null) {
+            VistaImagenesController.setFotos(fotosCliente);
+            Stage stage = (Stage) this.tomarFotoClienteBtn.getScene().getWindow();
+            Loader.loadAsParent(stage, "/mx/empenofacil/gui/VistaImagenes.fxml", "Fotos");
+        }
+    }
+
     private void abrirCamara() {
-        Stage stage = (Stage) this.tomarFotoPrendaBtn.getScene().getWindow();
-        Loader.loadAsParent(HomeController.getStage(), "/mx/empenofacil/gui/Camara.fxml", "Cámara");
-        stage.close();
+        Stage stage = (Stage) this.tomarFotoClienteBtn.getScene().getWindow();
+        Loader.loadAsParent(stage, "/mx/empenofacil/gui/Camara.fxml", "Cámara");
     }
 
     @FXML
@@ -150,6 +176,7 @@ public class RegistrarEmpenoController implements Initializable {
                 rfc.setText(cliente.getRfc());
                 identificacion.setText(cliente.getIdentificacion());
                 editar.setDisable(false);
+                editarCliente = true;
             }
         }
     }
@@ -193,6 +220,40 @@ public class RegistrarEmpenoController implements Initializable {
 
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.close();
+        }
+    }
+
+    @FXML
+    private void agregarPrenda() {
+        RegistroPrendaController.setPrendaAEditar(null, 0);
+        Stage window = (Stage) this.prendasView.getScene().getWindow();
+        Loader.loadAsParent(window, "/mx/empenofacil/gui/RegistroPrenda.fxml", "RegistrarPrenda");
+    }
+
+    @FXML
+    private void editarPrenda() {
+        Prenda prenda = (Prenda) prendasView.getSelectionModel().getSelectedItem();
+        int indexPrenda = prendasView.getSelectionModel().getSelectedIndex();
+        RegistroPrendaController.setPrendaAEditar(prenda, indexPrenda);
+        Stage window = (Stage) this.prendasView.getScene().getWindow();
+        Loader.loadAsParent(window, "/mx/empenofacil/gui/RegistroPrenda.fxml", "RegistrarPrenda");
+    }
+
+    @FXML
+    private void guardar() {
+
+        if (cliente != null) {
+            if (listaPrendas != null) {
+                cliente.setFotos(fotosCliente);
+                if (!editarCliente) {
+                    ClienteDAO.agregarCliente(cliente);
+                } else {
+                    ClienteDAO.actualizarCliente(cliente);
+                }
+                for (Prenda prenda : listaPrendas) {
+                    PrendaDAO.registrarPrenda(prenda);
+                }
+            }
         }
     }
 

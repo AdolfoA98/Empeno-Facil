@@ -307,9 +307,13 @@ public class CamaraController implements Initializable {
 
         stopCamera = true;
         Image image = imgWebCamCapturedImage.getImage();
-        RegistrarEmpenoController.addPhoto(image, tipoFoto);
+        if(tipoFoto.equals("prenda")){
+            RegistroPrendaController.agragarFoto(image);
+        } else if(tipoFoto.equals("cliente")){
+            RegistrarEmpenoController.addPhoto(image);
+        }
         closeCamera();
-        regresar();
+        cerrar();
 
     }
 
@@ -317,13 +321,12 @@ public class CamaraController implements Initializable {
 
         stopCamera = true;
         closeCamera();
-        regresar();
+        cerrar();
         
     }
 
-    private void regresar() {
+    private void cerrar() {
         Stage stage = (Stage) btnStartCamera.getScene().getWindow();
-        Loader.loadAsParent(HomeController.getStage(), "/mx/empenofacil/gui/RegistrarEmpeno.fxml", "Registrar empeño");
         stage.close();
     }
 

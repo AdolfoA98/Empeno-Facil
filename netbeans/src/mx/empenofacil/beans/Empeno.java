@@ -25,6 +25,10 @@ public class Empeno {
     private Double almacenaje;
     private String nombrecotitular;
     private List<Prenda> prendas;
+    private Boolean extendido;
+    private Boolean vencido;
+    private Boolean cancelado;
+    private Boolean comercializado;
 
     /**
      * @return the idempeno
@@ -172,6 +176,41 @@ public class Empeno {
 
     public void setPrendas(List<Prenda> prendas) {
         this.prendas = prendas;
+    }
+
+    /**
+     * @return the extendido
+     */
+    public Boolean getExtendido() {
+        return extendido;
+    }
+
+    /**
+     * @return the vencido
+     */
+    public Boolean getVencido() {
+        return vencido;
+    }
+
+    /**
+     * @param vencido the vencido to set
+     */
+    public void setVencido(Boolean vencido) {
+        this.vencido = vencido;
+    }
+
+    /**
+     * @return the cancelado
+     */
+    public Boolean getCancelado() {
+        return cancelado;
+    }
+
+    /**
+     * @return the comercializado
+     */
+    public Boolean getComercializado() {
+        return comercializado;
     }
     
 }

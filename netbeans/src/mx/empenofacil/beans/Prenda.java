@@ -5,6 +5,9 @@
  */
 package mx.empenofacil.beans;
 
+import java.util.List;
+import javafx.scene.image.Image;
+
 /**
  *
  * @author adolf
@@ -21,6 +24,7 @@ public class Prenda {
     private String descripcion;
     private Double peso;
     private Boolean comercializado;
+    private List<Image> fotos;
 
     /**
      * @return the idprenda
@@ -154,6 +158,17 @@ public class Prenda {
 
     public void setComercializado(Boolean comercializado) {
         this.comercializado = comercializado;
+    }
+    
+    public void setFotos(List<Image> fotos){
+        this.fotos = fotos;
+    }
+
+    /**
+     * @return the fotos
+     */
+    public List<Image> getFotos() {
+        return fotos;
     }
     
     

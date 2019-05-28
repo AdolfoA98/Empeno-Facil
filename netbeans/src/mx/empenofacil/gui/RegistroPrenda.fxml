@@ -5,7 +5,245 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+<?import java.net.URL?>
+<?import com.jfoenix.controls.JFXButton?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mx.empenofacil.gui.controllers.RegistroPrendaController">
+<VBox id="mainPane"
+      prefHeight="650.0"
+      prefWidth="370.0"
+      style="-fx-background-color: white;" 
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="mx.empenofacil.gui.controllers.RegistroPrendaController">
     
-</AnchorPane>
+    <stylesheets>
+        <URL value="@styles/sgeneral.css" />
+    </stylesheets>
+    
+    <HBox>
+        <javafx.scene.image.ImageView fitHeight="80"
+                                      fitWidth="80"
+                                      fx:id="fotoView"
+                                      preserveRatio="true" >
+            <image>
+                <javafx.scene.image.Image url="/mx/empenofacil/imagenes/default.png" />
+            </image>
+        </javafx.scene.image.ImageView>
+                
+        <StackPane HBox.hgrow="ALWAYS">
+            <JFXButton fx:id="tomarFotoBtn"
+                       text=" Tomar foto"
+                       onAction="#tomarFoto" 
+                       style="-fx-background-color:#EEEBEB;"
+                       StackPane.alignment="BOTTOM_LEFT">
+                <font>
+                    <Font name="Segoe MDL2 Assets"/>
+                </font>
+                <StackPane.margin>
+                    <Insets bottom="25"
+                            left="8" />
+                </StackPane.margin>
+            </JFXButton>
+                    
+            <JFXButton fx:id="verFotosBtn"
+                       text=" Ver fotos"
+                       onAction="#verFotos" 
+                       style="-fx-background-color:#EEEBEB;"
+                       StackPane.alignment="BOTTOM_LEFT">
+                <font>
+                    <Font name="Segoe MDL2 Assets"/>
+                </font>
+                <StackPane.margin>
+                    <Insets top="25"
+                            left="8" />
+                </StackPane.margin>   
+            </JFXButton>
+        </StackPane>
+        <VBox.margin>
+            <Insets top="10"
+                    left="20"
+                    right="20"/>
+        </VBox.margin>
+    </HBox>
+    
+    <Label text="Registrar prenda">
+        <font>
+            <Font name="Segoe UI Semilight"
+                  size="20.0"/>
+        </font>
+        <VBox.margin>
+            <Insets top="20"
+                    left="20"/>
+        </VBox.margin>
+    </Label>
+    
+    <Label text="Nombre">
+        <font>
+            <Font name="Segoe UI Semilight"/>
+        </font>
+        <VBox.margin>
+            <Insets top="8"
+                    left="20"
+                    right="20"/>
+        </VBox.margin>
+    </Label>
+    
+    <TextField fx:id="nombrePrenda"
+               minWidth="290">
+        <VBox.margin>
+            <Insets top="5"
+                    left="20"
+                    right="20"/>
+        </VBox.margin>
+    </TextField>
+    
+    <Label text="Descripción">
+        <font>
+            <Font name="Segoe UI Semilight"/>
+        </font>
+        <VBox.margin>
+            <Insets top="8"
+                    left="20"
+                    right="20"/>
+        </VBox.margin>
+    </Label>
+    
+    <TextArea fx:id="descripcionPrenda"
+              minWidth="290"
+              maxHeight="60" >
+        <VBox.margin>
+            <Insets top="5"
+                    left="20"
+                    right="20"/>
+        </VBox.margin>
+    </TextArea>
+    
+    <Label text="Peso">
+        <font>
+            <Font name="Segoe UI Semilight"/>
+        </font>
+        <VBox.margin>
+            <Insets top="8"
+                    left="20"
+                    right="20"/>
+        </VBox.margin>
+    </Label>
+    
+    <TextField fx:id="pesoPrenda"
+               minWidth="290">
+        <VBox.margin>
+            <Insets top="5"
+                    left="20"
+                    right="20"/>
+        </VBox.margin>
+    </TextField>
+    
+    <Label text="Avalúo">
+        <font>
+            <Font name="Segoe UI Semilight"/>
+        </font>
+        <VBox.margin>
+            <Insets top="8"
+                    left="20"
+                    right="20"/>
+        </VBox.margin>
+    </Label>
+    
+    <TextField fx:id="avaluoPrenda"
+               minWidth="290">
+        <VBox.margin>
+            <Insets top="5"
+                    left="20"
+                    right="20"/>
+        </VBox.margin>
+    </TextField>
+    
+    <Label text="Monto prestado">
+        <font>
+            <Font name="Segoe UI Semilight"/>
+        </font>
+        <VBox.margin>
+            <Insets top="8"
+                    left="20"
+                    right="20"/>
+        </VBox.margin>
+    </Label>
+    
+    <TextField fx:id="montoPrestado"
+               minWidth="290">
+        <VBox.margin>
+            <Insets top="5"
+                    left="20"
+                    right="20"/>
+        </VBox.margin>
+    </TextField>
+    
+    <Label text="Tipo">
+        <font>
+            <Font name="Segoe UI Semilight"/>
+        </font>
+        <VBox.margin>
+            <Insets top="8"
+                    left="20"
+                    right="20"/>
+        </VBox.margin>
+    </Label>
+    
+    <ComboBox fx:id="tipoPrenda"
+              minWidth="330">
+        <VBox.margin>
+            <Insets top="5"
+                    left="20"
+                    right="20"/>
+        </VBox.margin>
+    </ComboBox>
+    
+    <Label text="Categoría">
+        <font>
+            <Font name="Segoe UI Semilight"/>
+        </font>
+        <VBox.margin>
+            <Insets top="8"
+                    left="20"
+                    right="20"/>
+        </VBox.margin>
+    </Label>
+    
+    <ComboBox fx:id="categoriaPrenda"
+              minWidth="330">
+        <VBox.margin>
+            <Insets top="5"
+                    left="20"
+                    right="20"/>
+        </VBox.margin>
+    </ComboBox>
+    
+    <StackPane>
+                
+        <JFXButton fx:id="aceptarBtn"
+                   mnemonicParsing="false"
+                   onAction="#agregarPrenda" 
+                   style="-fx-background-color:#EEEBEB;"
+                   text="Aceptar">
+            <StackPane.margin>
+                <Insets  right="150" />
+            </StackPane.margin>
+        </JFXButton>
+                
+        <JFXButton fx:id="cancelarBtn"
+                   style="-fx-background-color:#EEEBEB;"
+                   mnemonicParsing="false"
+                   onAction="#cerrarVentana" 
+                   text="Cancelar">
+            <StackPane.margin>
+                <Insets  left="150" />
+            </StackPane.margin>
+        </JFXButton>
+                
+        <VBox.margin>
+            <Insets top="20"/>
+        </VBox.margin>
+    </StackPane>
+    
+</VBox>

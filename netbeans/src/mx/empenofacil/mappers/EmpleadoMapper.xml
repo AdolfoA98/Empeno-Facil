@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="empleado">
+    
+    <resultMap id="empleadoMap" type="mx.empenofacil.beans.Empleado">
+        <id column="idempleado" property="idEmpleado"/>
+        <!-- <association column="idsucursal" property="sucursal" select="sucursal.buscarPorId"/> -->
+        <association column="tipoempleado" property="tipoEmpleado" select="itemCatalogo.buscarPorId"/>
+    </resultMap>
+    
+    <select id="todos" resultMap="empleadoMap">
+        SELECT *
+        FROM empenofacil.empleado;
+    </select>
+    
+    <select id="buscarPorId" resultMap="empleadoMap" parameterType="int">
+        SELECT *
+        FROM empenofacil.empleado
+        WHERE idempleado = #{id};
+    </select>
+    
+</mapper>

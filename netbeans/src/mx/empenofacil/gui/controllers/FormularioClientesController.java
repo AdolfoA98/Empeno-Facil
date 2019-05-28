@@ -149,24 +149,21 @@ public class FormularioClientesController implements Initializable {
                 clienteActualizacion.setNombres(nombreCliente.getText());
                 clienteActualizacion.setRfc(rfc.getText());
                 clienteActualizacion.setTipoidentificacion(identificaciones.get(box_tipoidentificacion.getSelectionModel().getSelectedIndex()).getIditemcatalogo());
-                if (ClienteDAO.agregarCliente(clienteActualizacion)) {
-                    alert.setContentText("Se ha agregado con exito el cliente");
-                    alert.show();
-                    FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation(getClass().getResource("/mx/empenofacil/gui/RegistrarEmpeno.fxml"));
-                    Parent ejemplo = loader.load();
-                    Scene ejemploEscena = new Scene(ejemplo);
 
-                    RegistrarEmpenoController controller = loader.getController();
-                    controller.initDataAgregadoActualizado(empleadoSesion, clienteActualizacion);
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/mx/empenofacil/gui/RegistrarEmpeno.fxml"));
+                Parent ejemplo = loader.load();
+                Scene ejemploEscena = new Scene(ejemplo);
 
-                    Stage stage = new Stage();
-                    stage.setScene(ejemploEscena);
-                    stage.show();
+                RegistrarEmpenoController controller = loader.getController();
+                controller.initDataAgregadoActualizado(empleadoSesion, clienteActualizacion);
 
-                    Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    window.close();
-                }
+                Stage stage = new Stage();
+                stage.setScene(ejemploEscena);
+                stage.show();
+
+                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                window.close();
             } else {
                 clienteActualizacion.setApellidos(apellidoCliente.getText());
                 clienteActualizacion.setCurp(curp.getText());
@@ -174,24 +171,28 @@ public class FormularioClientesController implements Initializable {
                 clienteActualizacion.setNombres(nombreCliente.getText());
                 clienteActualizacion.setRfc(rfc.getText());
                 clienteActualizacion.setTipoidentificacion(identificaciones.get(box_tipoidentificacion.getSelectionModel().getSelectedIndex()).getIditemcatalogo());
-                if (ClienteDAO.actualizarCliente(clienteActualizacion)) {
-                    alert.setContentText("Se ha actualizado con exito el cliente");
-                    alert.show();
-                    FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation(getClass().getResource("/mx/empenofacil/gui/Empenio.fxml"));
-                    Parent ejemplo = loader.load();
-                    Scene ejemploEscena = new Scene(ejemplo);
 
-                    EmpenioController controller = loader.getController();
-                    controller.initDataAgregadoActualizado(empleadoSesion, clienteActualizacion);
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/mx/empenofacil/gui/RegistrarEmpeno.fxml"));
+                Parent ejemplo = loader.load();
+                Scene ejemploEscena = new Scene(ejemplo);
 
-                    Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    window.setScene(ejemploEscena);
-                    window.show();
-                } else {
-                    alert.setContentText("No se pudo actualizar el cliente, intentelo en otro momento");
-                    alert.show();
-                }
+                RegistrarEmpenoController controller = loader.getController();
+                controller.initDataAgregadoActualizado(empleadoSesion, clienteActualizacion);
+
+                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                window.setScene(ejemploEscena);
+                window.show();
+
+                /**
+                 * if (ClienteDAO.actualizarCliente(clienteActualizacion)) {
+                 * alert.setContentText("Se ha actualizado con exito el
+                 * cliente"); alert.show();
+                 *
+                 * } else { alert.setContentText("No se pudo actualizar el
+                 * cliente, intentelo en otro momento"); alert.show();
+                }*
+                 */
             }
         } else {
             alert.setContentText("Existen campos invalidos");
