@@ -12,7 +12,7 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 
 <BorderPane fx:id="mainPane"
-            prefHeight="530.0"
+            prefHeight="580.0"
             prefWidth="850.0"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="mx.empenofacil.gui.controllers.RegistrarEmpenoController">
@@ -210,6 +210,66 @@
     
             <TextField fx:id="identificacion"
                        editable="false" 
+                       minWidth="290">
+                <VBox.margin>
+                    <Insets top="5"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </TextField>
+            
+            <Label text="Interés">
+                <font>
+                    <Font name="Segoe UI Semilight"/>
+                </font>
+                <VBox.margin>
+                    <Insets top="8"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </Label>
+    
+            <TextField fx:id="interesTxt"
+                       minWidth="290">
+                <VBox.margin>
+                    <Insets top="5"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </TextField>
+            
+            <Label text="Almacenaje">
+                <font>
+                    <Font name="Segoe UI Semilight"/>
+                </font>
+                <VBox.margin>
+                    <Insets top="8"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </Label>
+    
+            <TextField fx:id="almacenajeTxt"
+                       minWidth="290">
+                <VBox.margin>
+                    <Insets top="5"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </TextField>
+            
+            <Label text="Nombre cotitular">
+                <font>
+                    <Font name="Segoe UI Semilight"/>
+                </font>
+                <VBox.margin>
+                    <Insets top="8"
+                            left="20"
+                            right="20"/>
+                </VBox.margin>
+            </Label>
+    
+            <TextField fx:id="cotitularTxt"
                        minWidth="290">
                 <VBox.margin>
                     <Insets top="5"

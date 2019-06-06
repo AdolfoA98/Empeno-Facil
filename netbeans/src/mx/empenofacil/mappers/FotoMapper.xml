@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="agregarFoto" parameterType="mx.empenofacil.beans.Foto">
         INSERT INTO fotografia VALUES (
             #{idfotografia},
-            #{img},
+            #{img, jdbcType=BLOB},
             #{nota}
         );
     </insert>

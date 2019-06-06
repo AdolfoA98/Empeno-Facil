@@ -44,6 +44,10 @@ public class HomeController implements Initializable {
     public static void setEmpleado(Empleado emp) {
         empleado = emp;
     }
+    
+    public static Empleado getEmpleado() {
+        return empleado;
+    }
 
     public static void setStage(Stage stg) {
         stage = stg;
@@ -174,6 +178,7 @@ public class HomeController implements Initializable {
         this.registrarEmpenoBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                RegistrarEmpenoController.limpiar();
                 Loader.loadAsParent(stage, "/mx/empenofacil/gui/RegistrarEmpeno.fxml", "Registrar empeño");
             }
 

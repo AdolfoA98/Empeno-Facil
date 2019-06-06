@@ -33,5 +33,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         <mapper resource="mx/empenofacil/mappers/PrendaMapper.xml"/>
         <mapper resource="mx/empenofacil/mappers/EmpenoMapper.xml"/>
         <mapper resource="mx/empenofacil/mappers/ArticuloMapper.xml"/>
+        <mapper resource="mx/empenofacil/mappers/FotoMapper.xml"/>
     </mappers>
 </configuration>

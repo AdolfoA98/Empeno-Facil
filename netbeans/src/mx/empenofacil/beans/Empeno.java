@@ -24,6 +24,7 @@ public class Empeno {
     private Double interes;
     private Double almacenaje;
     private String nombrecotitular;
+    private Integer estatusEmpeno;
     private List<Prenda> prendas;
     private Boolean extendido;
     private Boolean vencido;
@@ -211,6 +212,41 @@ public class Empeno {
      */
     public Boolean getComercializado() {
         return comercializado;
+    }
+
+    /**
+     * @param extendido the extendido to set
+     */
+    public void setExtendido(Boolean extendido) {
+        this.extendido = extendido;
+    }
+
+    /**
+     * @param cancelado the cancelado to set
+     */
+    public void setCancelado(Boolean cancelado) {
+        this.cancelado = cancelado;
+    }
+
+    /**
+     * @param comercializado the comercializado to set
+     */
+    public void setComercializado(Boolean comercializado) {
+        this.comercializado = comercializado;
+    }
+
+    /**
+     * @return the statusEmpeno
+     */
+    public Integer getEstatusEmpeno() {
+        return estatusEmpeno;
+    }
+
+    /**
+     * @param estatusEmpeno the statusEmpeno to set
+     */
+    public void setEstatusEmpeno(Integer estatusEmpeno) {
+        this.estatusEmpeno = estatusEmpeno;
     }
     
 }

@@ -116,7 +116,7 @@ public class CamaraController implements Initializable {
 
     private ObjectProperty<Image> imageProperty = new SimpleObjectProperty<Image>();
 
-    private String cameraListPromptText = "Choose Camera";
+    private String cameraListPromptText = "Elige una cámara";
 
     @Override
 

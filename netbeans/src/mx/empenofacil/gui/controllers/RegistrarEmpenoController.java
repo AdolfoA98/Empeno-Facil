@@ -7,8 +7,13 @@ package mx.empenofacil.gui.controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
@@ -29,10 +34,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import mx.empenofacil.beans.Cliente;
+import mx.empenofacil.beans.Empeno;
 import mx.empenofacil.beans.Empleado;
 import mx.empenofacil.beans.Prenda;
+import mx.empenofacil.dao.BolsaDAO;
 import mx.empenofacil.dao.ClienteDAO;
+import mx.empenofacil.dao.EmpenoDAO;
 import mx.empenofacil.dao.PrendaDAO;
+import mx.empenofacil.dao.TransaccioncajaDAO;
 import mx.empenofacil.gui.tools.Loader;
 
 /**
@@ -44,9 +53,9 @@ public class RegistrarEmpenoController implements Initializable {
 
     private static ObjectProperty<Image> imageProperty = new SimpleObjectProperty<>();
 
-    private static List<Image> fotosPrenda;
     private static List<Image> fotosCliente;
     private static ObservableList<Prenda> listaPrendas;
+    private static Double totalPrestado;
 
     public static void addPhoto(Image foto) {
         if (fotosCliente == null) {
@@ -61,11 +70,17 @@ public class RegistrarEmpenoController implements Initializable {
     }
 
     public static void agregarPrenda(Prenda prenda) {
+        totalPrestado += prenda.getMontoprestado();
         listaPrendas.add(prenda);
     }
 
     public static void editarPrendaListada(Prenda prendaEditada, int index) {
         listaPrendas.set(index, prendaEditada);
+    }
+    
+    public static void limpiar(){
+        fotosCliente = null;
+        listaPrendas = null;
     }
 
     @FXML
@@ -103,6 +118,15 @@ public class RegistrarEmpenoController implements Initializable {
 
     @FXML
     private TableView prendasView;
+    
+    @FXML
+    private TextField almacenajeTxt;
+    
+    @FXML
+    private TextField interesTxt;
+    
+    @FXML
+    private TextField cotitularTxt;
 
     private Empleado empleadoSesion;
     private Cliente cliente = null;
@@ -115,6 +139,7 @@ public class RegistrarEmpenoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         editarCliente = false;
+        totalPrestado = 0.0;
 
         if (listaPrendas == null) {
             List<Prenda> lista = new ArrayList<>();
@@ -244,13 +269,51 @@ public class RegistrarEmpenoController implements Initializable {
 
         if (cliente != null) {
             if (listaPrendas != null) {
+                
+                Random rand = new Random();
+                
                 cliente.setFotos(fotosCliente);
                 if (!editarCliente) {
+                    cliente.setIdcliente(rand.nextInt());
                     ClienteDAO.agregarCliente(cliente);
                 } else {
                     ClienteDAO.actualizarCliente(cliente);
                 }
+                
+                Double balanceActual = BolsaDAO.getMontoBolsa();
+                
+                HashMap<String, Object> transaccion = new HashMap<>();
+                transaccion.put("sucursal", 1);
+                transaccion.put("monto", totalPrestado);
+                transaccion.put("balacecaja", (balanceActual - totalPrestado));
+                transaccion.put("descripcion", "Empeño");
+                
+                TransaccioncajaDAO.registrarTransaccion(transaccion);
+                
+                int idEmpeno = rand.nextInt();
+                
+                Empeno empeno = new Empeno();
+                empeno.setIdempeno(idEmpeno);
+                empeno.setCliente(cliente.getIdcliente());
+                empeno.setEmpleado(HomeController.getEmpleado().getIdempleado());
+                empeno.setTransaccioncaja(TransaccioncajaDAO.obtenerUltimoId());
+                LocalDate fecha = LocalDate.now();
+                empeno.setFecha(Date.valueOf(fecha));
+                empeno.setFechalimite(Date.valueOf(LocalDate.of(fecha.getDayOfYear(), fecha.getMonthValue() + 1, fecha.getDayOfMonth())));
+                empeno.setFechaextendida(empeno.getFechalimite());
+                empeno.setAlmacenaje(almacenajeTxt.getText() == null? Double.valueOf(almacenajeTxt.getText()) : 0.0);
+                empeno.setInteres(interesTxt.getText() == null? Double.valueOf(interesTxt.getText()) : 0.0);
+                empeno.setNombrecotitular(cotitularTxt.getText());
+                empeno.setEstatusEmpeno(22);
+                empeno.setExtendido(false);
+                empeno.setVencido(false);
+                empeno.setCancelado(false);
+                empeno.setComercializado(false);
+                
+                EmpenoDAO.registrarEmpeno(empeno);
+                
                 for (Prenda prenda : listaPrendas) {
+                    prenda.setEmpeno(empeno.getIdempeno());
                     PrendaDAO.registrarPrenda(prenda);
                 }
             }

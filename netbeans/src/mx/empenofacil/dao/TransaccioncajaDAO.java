@@ -15,22 +15,32 @@ import org.apache.ibatis.session.SqlSession;
  *
  * @author adolf
  */
-public class BolsaDAO {
+public class TransaccioncajaDAO {
     
-    public static Double getMontoBolsa(){
-        Double resultado = null;
+    public static Integer obtenerUltimoId() {
+        Integer id = 0;
         
         try (SqlSession conn = MyBatisUtils.getSession()) {
-            resultado = conn.selectOne("getMontoBolsa");
+            id = conn.selectOne("getUltimoId");
         } catch (Exception ex) {
             Logger.getLogger(BolsaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return resultado;
+        return id;
     }
     
-    public static boolean registrarMonto(HashMap<String, Object> parametros){
-        return TransaccioncajaDAO.registrarTransaccion(parametros);
+    public static boolean registrarTransaccion(HashMap<String, Object> parametros){
+        boolean completado = true;
+        
+        try (SqlSession conn = MyBatisUtils.getSession()) {
+            conn.insert("registrarTransaccion", parametros);
+            conn.commit();
+        } catch (Exception ex) {
+            Logger.getLogger(BolsaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            completado = false;
+        }
+        
+        return completado;
     }
     
 }

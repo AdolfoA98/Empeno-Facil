@@ -15,12 +15,12 @@ public class Foto {
     
     private Integer idfotografia;
     private Integer iddueno;
-    private Image img;
+    private byte[] img;
     private String nota;
     
     public Foto(){}
     
-    public Foto(Integer idfotografia, Integer iddueno, Image img, String nota){
+    public Foto(Integer idfotografia, Integer iddueno, byte[] img, String nota){
         this.idfotografia = idfotografia;
         this.iddueno = iddueno;
         this.img = img;
@@ -58,14 +58,14 @@ public class Foto {
     /**
      * @return the img
      */
-    public Image getImg() {
+    public byte[] getImg() {
         return img;
     }
 
     /**
      * @param img the img to set
      */
-    public void setImg(Image img) {
+    public void setImg(byte[] img) {
         this.img = img;
     }
 

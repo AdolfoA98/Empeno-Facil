@@ -5,13 +5,17 @@
  */
 package mx.empenofacil.dao;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
+import javax.imageio.ImageIO;
 import mx.empenofacil.beans.Foto;
 import mx.empenofacil.beans.ItemCatalogo;
 import mx.empenofacil.beans.Prenda;
@@ -31,7 +35,12 @@ public class PrendaDAO {
             conn.insert("registrarPrenda", prenda);
             for(Image img: prenda.getFotos()){
                 Random rand = new Random();
-                Foto foto = new Foto(rand.nextInt(), prenda.getIdprenda(), img, "");
+                BufferedImage bImage = SwingFXUtils.fromFXImage(img, null);
+                ByteArrayOutputStream s = new ByteArrayOutputStream();
+                ImageIO.write(bImage, "png", s);
+                byte[] image = s.toByteArray();
+                s.close();
+                Foto foto = new Foto(rand.nextInt(), prenda.getIdprenda(), image, "");
                 conn.insert("Foto.agregarFoto", foto);
                 conn.insert("Foto.relacionarFotoPrenda", foto);
             }

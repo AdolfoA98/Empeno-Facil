@@ -179,6 +179,7 @@ public class RegistroPrendaController implements Initializable {
     
     @FXML
     private void cerrarVentana(){
+        fotosPrenda = null;
         Stage stage = (Stage) this.tipoPrenda.getScene().getWindow();
         stage.close();
     }

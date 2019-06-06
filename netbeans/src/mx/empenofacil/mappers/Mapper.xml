@@ -5,13 +5,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="Categoria">
     <select id="getMontoBolsa" resultType="double">
-        SELECT balacecaja
+        SELECT balancecaja
         FROM empenofacil.transaccioncaja
         ORDER BY idtransaccioncaja DESC
         limit 1;
     </select>
     
-    <insert id="setMontoBolsa" parameterType="map">
+    <select id="getUltimoId" resultType="int">
+        SELECT idtransaccioncaja
+        FROM empenofacil.transaccioncaja
+        ORDER BY idtransaccioncaja DESC
+        limit 1;
+    </select>
+    
+    <insert id="registrarTransaccion" parameterType="map">
         INSERT INTO transaccioncaja
         VALUES (NULL, #{sucursal}, NULL, #{monto}, #{balacecaja}, NOW(), #{descripcion});
     </insert>
@@ -41,7 +48,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{fechaextendida},
             #{interes},
             #{almacenaje},
-            #{nombrecotitular}
+            #{nombrecotitular},
+            #{estatusEmpeno},
             #{extendido},
             #{vencido},
             #{cancelado},
