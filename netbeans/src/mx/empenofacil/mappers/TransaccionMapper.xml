@@ -19,4 +19,18 @@
         FROM empenofacil.transaccioncaja;
     </select>
     
+    <insert id="registrar" parameterType="map" useGeneratedKeys="true" keyProperty="idtransaccioncaja">
+        INSERT INTO transaccioncaja (sucursal,monto,balancecaja,descripcion)
+        SELECT #{idsucursal},#{monto},balancecaja + #{monto},#{descripcion} FROM transaccioncaja ORDER BY idtransaccioncaja DESC LIMIT 1 FOR UPDATE;
+    </insert>
+    
+    <select id="obtenerTransaccionApartado" resultType="mx.empenofacil.beans.TransaccionCaja" parameterType="int">
+        SELECT * FROM empenofacil.transaccioncaja WHERE idtransaccioncaja = #{transaccion};
+    </select>
+    
+    <update id="cancelacion" parameterType="map">
+        UPDATE transaccioncaja
+        SET cancelacion = #{idtransacciongenerada}
+        WHERE idtransaccioncaja = #{idtransaccioncancelada};
+    </update>
 </mapper>

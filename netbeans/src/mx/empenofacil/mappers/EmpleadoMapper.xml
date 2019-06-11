@@ -4,7 +4,7 @@
 <mapper namespace="empleado">
     
     <resultMap id="empleadoMap" type="mx.empenofacil.beans.Empleado">
-        <id column="idempleado" property="idEmpleado"/>
+        <id column="idempleado" property="idempleado"/>
         <!-- <association column="idsucursal" property="sucursal" select="sucursal.buscarPorId"/> -->
         <association column="tipoempleado" property="tipoEmpleado" select="itemCatalogo.buscarPorId"/>
     </resultMap>

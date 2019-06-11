@@ -30,7 +30,17 @@ public class BolsaDAO {
     }
     
     public static boolean registrarMonto(HashMap<String, Object> parametros){
-        return TransaccioncajaDAO.registrarTransaccion(parametros);
+        boolean completado = true;
+        
+        try (SqlSession conn = MyBatisUtils.getSession()) {
+            conn.insert("setMontoBolsa", parametros);
+            conn.commit();
+        } catch (Exception ex) {
+            Logger.getLogger(BolsaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            completado = false;
+        }
+        
+        return completado;
     }
     
 }

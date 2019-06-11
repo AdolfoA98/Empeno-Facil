@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="522.0" prefWidth="715.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mx.empenofacil.gui.controllers.RegistrarReempenoRefrendoController">
+   <children>
+      <TableView fx:id="tblEmpeno" layoutX="60.0" layoutY="161.0" onMouseClicked="#seleccionEmpeno" prefHeight="321.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="colId" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="colNombre" prefWidth="201.0" text="Nombre de Cliente" />
+            <TableColumn fx:id="colPrendas" prefWidth="195.0" text="Prenda (s)" />
+            <TableColumn fx:id="colInteres" prefWidth="121.0" text="Dinamico con total para finiquito, interes a pagar para refrendo y total en valor de prendas para reempeño" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnRegresar" layoutX="60.0" layoutY="70.0" mnemonicParsing="false" onAction="#regresar" text="Regresar" />
+      <TextField fx:id="txtCURP" layoutX="206.0" layoutY="70.0" prefHeight="31.0" prefWidth="207.0" promptText="Ingrese la CURP del Cliente" />
+      <Button fx:id="btnFiltrar" layoutX="422.0" layoutY="70.0" mnemonicParsing="false" onAction="#filtrar" text="Filtrar" />
+      <Button fx:id="btnRegistrar" layoutX="581.0" layoutY="70.0" mnemonicParsing="false" onAction="#registrar" text="Registrar" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="mx.empenofacil.gui.controllers.AdministrarApartadosController">
+   <children>
+      <Button fx:id="btn_regresar" layoutX="39.0" layoutY="40.0" mnemonicParsing="false" onAction="#regresar" text="Regresar" />
+      <TableView fx:id="tb_Apartados" layoutX="14.0" layoutY="109.0" onMouseClicked="#seleccion" prefHeight="276.0" prefWidth="569.0">
+        <columns>
+          <TableColumn fx:id="col_id" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="col_nombreCliente" prefWidth="192.0" text="Nombre del cliente" />
+            <TableColumn fx:id="col_articulos" prefWidth="143.0" text="Artículos" />
+            <TableColumn fx:id="col_monto" prefWidth="152.0" text="Monto a pagar" />
+        </columns>
+      </TableView>
+      <TextField fx:id="txt_curp" layoutX="130.0" layoutY="40.0" promptText="Ingrese la CURP" />
+      <Button fx:id="btn_filtrar" layoutX="328.0" layoutY="40.0" mnemonicParsing="false" onAction="#filtrar" text="Filtrar" />
+      <Button fx:id="btn_cancelar" disable="true" layoutX="416.0" layoutY="40.0" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
+      <Button fx:id="btn_liquidar" disable="true" layoutX="509.0" layoutY="40.0" mnemonicParsing="false" onAction="#liquidar" text="Liquidar" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="empeno">
+    
+    <resultMap id="empenoMap" type="mx.empenofacil.beans.Empeño2">
+        <id column="idempeno" property="idEmpeño"/>
+        <association column="empleado" property="empleado" select="empleado.buscarPorId"/>
+        <association column="cliente" property="cliente" select="cliente.buscarPorId"/>
+        <association column="transaccioncaja" property="transaccionCaja" select="transaccion.buscarPorId"/>
+        <collection column="idempeno" property="prendas" select="prenda.buscarPorEmpeno"/>
+    </resultMap>
+    
+    <select id="todos" resultMap="empenoMap">
+        SELECT *
+        FROM empenofacil.empenoview;
+    </select>
+    
+    <select id="vencidosNoComercializados" resultMap="empenoMap">
+        SELECT *
+        FROM empenofacil.empenoview
+        WHERE vencido = TRUE
+        AND comercializado = FALSE
+        AND cancelado = FALSE;
+    </select>
+    
+    <select id="buscarPorIdCliente" resultType="mx.empenofacil.beans.Empeno" parameterType="mx.empenofacil.beans.Empeno">
+        SELECT * FROM empenofacil.empeno WHERE cliente = #{cliente} AND estatusEmpeno = #{estatusEmpeno};
+    </select>
+    
+    <select id="buscarPorEstatus" resultType="mx.empenofacil.beans.Empeno" parameterType="int">
+        SELECT * FROM empenofacil.empeno WHERE estatusEmpeno = #{estatusEmpeno};
+    </select>
+    
+    <select id="getEmpenoPorId" resultType="mx.empenofacil.beans.Empeno" parameterType="int">
+        SELECT * FROM empenofacil.empeno WHERE idempeno = #{idempeno};
+    </select>
+    
+    <update id="actualizarEstado" parameterType="mx.empenofacil.beans.Empeno">
+        UPDATE empenofacil.empeno SET estatusEmpeno = #{estatusEmpeno} WHERE idempeno = #{idempeno};
+    </update>
+    
+    <insert id="guardarNuevoEmpeno" parameterType="mx.empenofacil.beans.Empeno">
+        INSERT INTO empenofacil.empeno (empleado, cliente, fechalimite, fechaextendida, interes, almacenaje, nombrecotitular, estatusEmpeno) 
+        VALUES (#{empleado},#{cliente},#{fechalimite},#{fechaextendida},#{interes},#{almacenaje},#{nombrecotitular},#{estatusEmpeno});
+    </insert>
+    
+    <select id="obtenerID" resultType="mx.empenofacil.beans.Empeno">
+        SELECT * FROM empenofacil.empeno ORDER BY idempeno DESC;
+    </select>
+    
+</mapper>

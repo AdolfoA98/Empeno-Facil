@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="571.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="mx.empenofacil.gui.controllers.ReempenoController">
+   <children>
+      <Pane layoutX="14.0" layoutY="14.0" prefHeight="168.0" prefWidth="573.0">
+         <children>
+            <TextField fx:id="txtNombreCliente" layoutX="14.0" layoutY="14.0" prefHeight="31.0" prefWidth="295.0" promptText="Nombre del cliente" />
+            <TextField fx:id="txtApellidosCliente" layoutX="14.0" layoutY="61.0" prefHeight="31.0" prefWidth="295.0" promptText="Apellidos del cliente" />
+            <TextField fx:id="txtCURP" layoutX="336.0" layoutY="14.0" prefHeight="31.0" prefWidth="227.0" promptText="CURP" />
+            <TextField fx:id="txtRFC" layoutX="336.0" layoutY="61.0" prefHeight="31.0" prefWidth="227.0" promptText="RFC" />
+            <TextField fx:id="txtIdentificacion" layoutX="14.0" layoutY="115.0" prefHeight="31.0" prefWidth="295.0" promptText="Identificación" />
+            <ComboBox fx:id="cmbIdentificacion" layoutX="331.0" layoutY="115.0" prefHeight="31.0" prefWidth="227.0" promptText="Tipo de Identificación" />
+            <Label layoutX="14.0" layoutY="-10.0" text="Información del cliente" />
+         </children>
+      </Pane>
+      <Pane layoutX="14.0" layoutY="182.0" prefHeight="118.0" prefWidth="573.0">
+         <children>
+            <TextField fx:id="txtNombreEmpleado" layoutX="14.0" layoutY="14.0" prefHeight="31.0" prefWidth="295.0" promptText="Nombre del empleado" />
+            <TextField fx:id="txtApellidosEmpleado" layoutX="14.0" layoutY="61.0" prefHeight="31.0" prefWidth="295.0" promptText="Apellidos del empleado" />
+            <TextField fx:id="txtNumeroPersonal" layoutX="329.0" layoutY="14.0" prefHeight="31.0" prefWidth="227.0" promptText="Número de personal" />
+            <ComboBox fx:id="cmbEmpleado" layoutX="329.0" layoutY="61.0" prefHeight="31.0" prefWidth="227.0" promptText="Tipo de empleado" />
+            <Label layoutX="14.0" layoutY="-10.0" text="Información del empleado" />
+         </children>
+      </Pane>
+      <Pane layoutX="14.0" layoutY="300.0" prefHeight="200.0" prefWidth="573.0">
+         <children>
+            <TextField fx:id="txtNombreArticulo" layoutX="14.0" layoutY="14.0" prefHeight="31.0" prefWidth="295.0" promptText="Nombre del artículo" />
+            <TextArea fx:id="txtDescripcionArticulo" layoutX="14.0" layoutY="52.0" prefHeight="141.0" prefWidth="295.0" promptText="Descripción del artículo" />
+            <TextField fx:id="txtPeso" layoutX="330.0" layoutY="14.0" prefHeight="31.0" prefWidth="227.0" promptText="Peso del artículo" />
+            <TextField fx:id="txtMontoPrestamo" layoutX="330.0" layoutY="111.0" prefHeight="31.0" prefWidth="227.0" promptText="Monto a prestar" />
+            <TextField fx:id="txtAvaluo" layoutX="330.0" layoutY="60.0" prefHeight="31.0" prefWidth="227.0" promptText="Avaluo del artículo" />
+            <ComboBox layoutX="330.0" layoutY="155.0" prefHeight="31.0" prefWidth="227.0" promptText="Artículos empeñados" />
+            <Label layoutX="14.0" layoutY="-10.0" text="Información de la o las prendas" />
+         </children>
+      </Pane>
+      <Button fx:id="btnCancelar" layoutX="33.0" layoutY="530.0" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
+      <Button fx:id="btnGuardar" layoutX="491.0" layoutY="530.0" mnemonicParsing="false" onAction="#guardar" text="Guardar" />
+   </children>
+</AnchorPane>

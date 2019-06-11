@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="apartado">
+    
+    <insert id="registrarApartado" parameterType="mx.empenofacil.beans.Apartado">
+        INSERT INTO empenofacil.apartado (empleado,cliente,estatusApartado) VALUES (#{empleado},#{cliente},#{estatusApartado});
+    </insert>
+    
+    <insert id="registrarArticulos" parameterType="map">
+        INSERT INTO empenofacil.articuloenapartado (apartado,articulo) VALUES
+        <foreach item="articulo" collection="articulos" separator=",">
+            (#{idapartado},#{articulo.idarticulo})
+        </foreach>
+    </insert>
+    
+    <insert id="registrarPagoApartado" parameterType="map">
+        INSERT INTO empenofacil.pagoapartado (apartado, transaccioncaja) VALUES (#{apartado},#{transaccioncaja});
+    </insert>
+    
+    <select id="obtenerID" resultType="mx.empenofacil.beans.Apartado">
+        SELECT * FROM empenofacil.apartado ORDER BY idapartado DESC LIMIT 1;
+    </select>
+    
+    <select id="obtenerApartadosPorEstatus" parameterType="int" resultType="mx.empenofacil.beans.Apartado">
+        SELECT * FROM empenofacil.apartado WHERE estatusApartado = #{estatusApartado};
+    </select>
+    
+    <select id="obtenerPagoApartado" resultType="mx.empenofacil.beans.PagoApartado" parameterType="int">
+        SELECT * FROM empenofacil.pagoapartado WHERE apartado = #{apartado};
+    </select>
+    
+    <select id="obtenerApartadosPorCliente" resultType="mx.empenofacil.beans.Apartado" parameterType="int">
+        SELECT * FROM empenofacil.apartado WHERE cliente = #{cliente};
+    </select>
+    
+    <select id="obtenerApartadoPorId" resultType="mx.empenofacil.beans.Apartado" parameterType="int">
+        SELECT * FROM empenofacil.apartado WHERE idapartado = #{apartado};
+    </select>
+    
+    <update id="cancelarEstatusApartado" parameterType="int">
+        UPDATE empenofacil.apartado SET estatusApartado = 27 WHERE idapartado = #{apartado};
+    </update>
+    
+    <update id="liquidarEstatusApartado" parameterType="int">
+        UPDATE empenofacil.apartado SET estatusApartado = 29 WHERE idapartado = #{apartado};
+    </update>
+</mapper>

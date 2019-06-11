@@ -1,6 +1,6 @@
 package mx.empenofacil.gui.controllers;
 
-import mx.empenofacil.beans.Prenda;
+import mx.empenofacil.beans.Prenda2;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
@@ -19,7 +19,7 @@ import javafx.util.StringConverter;
 
 public class PrendaPane extends GridPane implements Initializable {
 
-    private Prenda prenda;
+    private Prenda2 prenda;
 
     @FXML
     private CheckBox cbx_comercializar;
@@ -39,7 +39,7 @@ public class PrendaPane extends GridPane implements Initializable {
     @FXML
     private Spinner<Double> spn_precio;
 
-    public PrendaPane(Prenda prenda) {
+    public PrendaPane(Prenda2 prenda) {
         this.prenda = prenda;
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass()
@@ -99,7 +99,7 @@ public class PrendaPane extends GridPane implements Initializable {
         txt_descripcion.setText(prenda.getDescripcion());
         
         lbl_avaluo.setText(prenda.getAvaluo().toString());
-        lbl_prestado.setText(prenda.getMontoprestado().toString());
+        lbl_prestado.setText(prenda.getMontoPrestado().toString());
 
         if (prenda.getComercializado()) {
             cbx_comercializar.setIndeterminate(true);
@@ -123,7 +123,7 @@ public class PrendaPane extends GridPane implements Initializable {
         }
     }
     
-    public Prenda getPrenda() {
+    public Prenda2 getPrenda() {
         return prenda;
     }
     

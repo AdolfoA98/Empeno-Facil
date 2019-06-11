@@ -1,7 +1,7 @@
 package mx.empenofacil.gui.controllers;
 
 import mx.empenofacil.beans.Articulo;
-import mx.empenofacil.beans.Empeno;
+import mx.empenofacil.beans.Empeño2;
 import mx.empenofacil.beans.Empleado;
 import mx.empenofacil.dao.EmpenoDAO;
 import java.io.IOException;
@@ -45,8 +45,8 @@ public class EmpenosVencidos extends VBox implements Initializable {
     public void actualizar() {
         empenos.getChildren().clear();
         
-        List<Empeno> empeñosList = EmpenoDAO.getVencidosNoComercializados();
-        for (Empeno empeno : empeñosList) {
+        List<Empeño2> empeñosList = EmpenoDAO.getVencidosNoComercializados();
+        for (Empeño2 empeno : empeñosList) {
             empenos.getChildren().add(new EmpenoPane(empeno));
         }
         
@@ -74,7 +74,7 @@ public class EmpenosVencidos extends VBox implements Initializable {
             for (Articulo articulo : empenoPane.getPrendasSeleccionadasComoArticulos()) {
                 articulo.setEmpleado(empleado);
                 // todo codigo de barras
-                articulo.setCodigoDeBarras("");
+                articulo.setCodigodebarras("");
                 articulos.add(articulo);
             }
         }

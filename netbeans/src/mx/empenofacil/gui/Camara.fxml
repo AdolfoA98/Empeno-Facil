@@ -8,8 +8,6 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.*?>
-<?import java.net.URL?>
-<?import com.jfoenix.controls.JFXButton?>
 
 <BorderPane prefHeight="400.0"
             prefWidth="500.0"
@@ -17,10 +15,6 @@
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="mx.empenofacil.gui.controllers.CamaraController">
 
-    <stylesheets>
-        <URL value="@styles/sgeneral.css" />
-    </stylesheets>
-    
     <bottom>
 
         <FlowPane fx:id="fpBottomPane"
@@ -28,29 +22,29 @@
                   columnHalignment="CENTER"
                   hgap="50.0" prefHeight="80.0"
                   prefWidth="200.0"
-                  style="-fx-background-color:white;">
+                  style="-fx-background-color:#ccc;">
 
             <children>
 
-                <JFXButton fx:id="btnStartCamera"
+                <Button fx:id="btnStartCamera"
                         minHeight="-Infinity"
                         minWidth="-Infinity"
-                        style="-fx-background-color:#EEEBEB;"
                         mnemonicParsing="false"
                         onAction="#tomarFoto"
                         text="Tomar foto">
 
                     <font>
+
                         <Font name="Segoe UI" fx:id="x1" />
+
                     </font>
 
-                </JFXButton>
+                </Button>
 
-                <JFXButton fx:id="btnDisposeCamera"
+                <Button fx:id="btnDisposeCamera"
                         font="$x1"
                         minHeight="-Infinity"
                         minWidth="-Infinity"
-                        style="-fx-background-color:#EEEBEB;"
                         mnemonicParsing="false"
                         onAction="#disposeCamera"
                         text="Cerrar" />
@@ -86,7 +80,7 @@
 
         <GridPane minWidth="500"
                   prefHeight="120.0"
-                  style="-fx-background-color:white;">
+                  style="-fx-background-color:#ccc;&#10;">
 
             <children>
 
@@ -96,12 +90,13 @@
                        GridPane.halignment="CENTER"
                        GridPane.hgrow="ALWAYS"
                        GridPane.rowIndex="0"
+                       GridPane.rowSpan="1"
                        GridPane.valignment="CENTER"
                        GridPane.vgrow="ALWAYS">
 
                     <font>
 
-                        <Font name="Segoe UI" size="28.0"/>
+                        <Font name="Segoe UI" size="28.0" />
 
                     </font>
 
@@ -114,8 +109,9 @@
                 </Label>
 
                 <Label font="$x1"
-                       text="Seleccione la WebCam a utilizar"
+                       text="Por favor, seleccione la WebCam a utilizar"
                        GridPane.columnIndex="0"
+                       GridPane.columnSpan="2" 
                        GridPane.halignment="RIGHT"
                        GridPane.hgrow="ALWAYS"
                        GridPane.rowIndex="1"
@@ -133,6 +129,7 @@
                 <ComboBox fx:id="cbCameraOptions"
                           prefWidth="170.0"
                           GridPane.columnIndex="1"
+                          GridPane.columnSpan="2" 
                           GridPane.rowIndex="1" />
 
             </children>

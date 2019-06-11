@@ -116,7 +116,7 @@ public class CamaraController implements Initializable {
 
     private ObjectProperty<Image> imageProperty = new SimpleObjectProperty<Image>();
 
-    private String cameraListPromptText = "Elige una cámara";
+    private String cameraListPromptText = "Choose Camera";
 
     @Override
 
@@ -307,13 +307,9 @@ public class CamaraController implements Initializable {
 
         stopCamera = true;
         Image image = imgWebCamCapturedImage.getImage();
-        if(tipoFoto.equals("prenda")){
-            RegistroPrendaController.agragarFoto(image);
-        } else if(tipoFoto.equals("cliente")){
-            RegistrarEmpenoController.addPhoto(image);
-        }
+        RegistrarEmpenoController.addPhoto(image, tipoFoto);
         closeCamera();
-        cerrar();
+        regresar();
 
     }
 
@@ -321,12 +317,13 @@ public class CamaraController implements Initializable {
 
         stopCamera = true;
         closeCamera();
-        cerrar();
+        regresar();
         
     }
 
-    private void cerrar() {
+    private void regresar() {
         Stage stage = (Stage) btnStartCamera.getScene().getWindow();
+        Loader.loadAsParent(HomeController.getStage(), "/mx/empenofacil/gui/RegistrarEmpeno.fxml", "Registrar empeño");
         stage.close();
     }
 

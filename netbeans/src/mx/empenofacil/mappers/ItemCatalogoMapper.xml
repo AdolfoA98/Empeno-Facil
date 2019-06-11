@@ -4,7 +4,7 @@
 <mapper namespace="itemCatalogo">
     
     <resultMap id="itemCatalogoMap" type="mx.empenofacil.beans.ItemCatalogo">
-        <id column="iditemcatalogo" property="idItemCatalogo"/>
+        <id column="iditemcatalogo" property="iditemcatalogo"/>
         <result column="nombre" property="nombre"/>
         <!-- <association column="itemcatalogosuperior" property="itemCatalogoSuperior" select="buscarPorId"/> -->
     </resultMap>
@@ -20,4 +20,9 @@
         WHERE iditemcatalogo = #{id};
     </select>
     
+    <select id="estadosventas" resultMap="itemCatalogoMap">
+        SELECT *
+        FROM empenofacil.itemcatalogo
+        WHERE itemcatalogoSuperior = 21;
+    </select>
 </mapper>

@@ -44,10 +44,6 @@ public class HomeController implements Initializable {
     public static void setEmpleado(Empleado emp) {
         empleado = emp;
     }
-    
-    public static Empleado getEmpleado() {
-        return empleado;
-    }
 
     public static void setStage(Stage stg) {
         stage = stg;
@@ -95,6 +91,7 @@ public class HomeController implements Initializable {
     private JFXButton listaNegraBtn;
     private JFXButton articulosBtn;
     private JFXButton apartarBtn;
+    private JFXButton venderBtn;
 
     //Sección de historial de operaciones
     private JFXButton apartadosBtn;
@@ -178,16 +175,63 @@ public class HomeController implements Initializable {
         this.registrarEmpenoBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                RegistrarEmpenoController.limpiar();
                 Loader.loadAsParent(stage, "/mx/empenofacil/gui/RegistrarEmpeno.fxml", "Registrar empeño");
             }
 
         });
         this.registrarRefrendoBtn = new JFXButton("\nRegistrar refrendo");
         this.registrarRefrendoBtn.setFont(Font.font("Segoe MDL2 Assets"));
+        this.registrarRefrendoBtn.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("/mx/empenofacil/gui/RegistrarReempenoRefrendo.fxml"));
+                    Parent ejemplo = loader.load();
+                    Scene ejemploEscena = new Scene(ejemplo);
+                    
+                    RegistrarReempenoRefrendoController controller = loader.getController();
+                    controller.initData(0, empleado);
+                    
+                    Stage window = new Stage();
+                    window.setScene(ejemploEscena);
+                    window.setTitle("Registrar refrendo");
+                    window.initOwner(stage);
+                    window.initModality(Modality.APPLICATION_MODAL);
+                    window.show();
+                } catch (IOException ex) {
+                    Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        
+        });
 
         this.registrarReempenoBtn = new JFXButton("\nRegistrar reempeño");
         this.registrarReempenoBtn.setFont(Font.font("Segoe MDL2 Assets"));
+        this.registrarReempenoBtn.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("/mx/empenofacil/gui/RegistrarReempenoRefrendo.fxml"));
+                    Parent ejemplo = loader.load();
+                    Scene ejemploEscena = new Scene(ejemplo);
+                    
+                    RegistrarReempenoRefrendoController controller = loader.getController();
+                    controller.initData(1,empleado);
+                    
+                    Stage window = new Stage();
+                    window.setScene(ejemploEscena);
+                    window.setTitle("Registrar refrendo");
+                    window.initOwner(stage);
+                    window.initModality(Modality.APPLICATION_MODAL);
+                    window.show();
+                } catch (IOException ex) {
+                    Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        
+        });
 
         this.listaNegraBtn = new JFXButton("\nLista negra");
         this.listaNegraBtn.setFont(Font.font("Segoe MDL2 Assets"));
@@ -209,15 +253,57 @@ public class HomeController implements Initializable {
 
         this.apartarBtn = new JFXButton("\nApartar artículo");
         this.apartarBtn.setFont(Font.font("Segoe MDL2 Assets"));
+        this.apartarBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Dialogs.mostrarDialog(new VentaPaneController(empleado, 2), "Apartar");
+            }
+        });
+        
+        this.venderBtn = new JFXButton("\nVender artículo(s)");
+        this.venderBtn.setFont(Font.font("Segoe MDL2 Assets"));
+        this.venderBtn.setOnAction((event) -> {
+            Dialogs.mostrarDialog(new VentaPaneController(empleado, 1), "Vender");
+        });
 
         //Historial de operaciones
         this.apartadosBtn = new JFXButton("\nApartados");
         this.apartadosBtn.setFont(Font.font("Segoe MDL2 Assets"));
+        this.apartadosBtn.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("/mx/empenofacil/gui/AdministrarApartados.fxml"));
+                    Parent ejemplo = loader.load();
+                    Scene ejemploEscena = new Scene(ejemplo);
+                    
+                    AdministrarApartadosController controller = loader.getController();
+                    controller.initData(empleado);
+                    
+                    Stage window = new Stage();
+                    window.setScene(ejemploEscena);
+                    window.setTitle("Apartados Disponibles");
+                    window.initOwner(stage);
+                    window.initModality(Modality.APPLICATION_MODAL);
+                    window.show();
+                } catch (IOException ex) {
+                    Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        
+        });
 
         this.ventasBtn = new JFXButton("\nVentas");
         this.ventasBtn.setFont(Font.font("Segoe MDL2 Assets"));
+        this.ventasBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Dialogs.mostrarDialog(new HistorialVentasController(), "Historial de ventas");
+            }
+        });
 
-        this.contratosBtn = new JFXButton("\nContratos");
+        this.contratosBtn = new JFXButton("\nContratos vencidos");
         this.contratosBtn.setFont(Font.font("Segoe MDL2 Assets"));
         this.contratosBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -263,6 +349,7 @@ public class HomeController implements Initializable {
         ventaList.add(this.listaNegraBtn);
         ventaList.add(this.articulosBtn);
         ventaList.add(this.apartarBtn);
+        ventaList.add(this.venderBtn);
 
         //Historial del operaciones
         this.historialList = new ArrayList<>();
@@ -285,7 +372,7 @@ public class HomeController implements Initializable {
     public void actualizarMontoCaja() {
 
         montoBolsa = BolsaDAO.getMontoBolsa();
-        cajaLabel.setText("Monto en caja: " + montoBolsa);
+        cajaLabel.setText("Caja: " + montoBolsa);
 
     }
 

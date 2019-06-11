@@ -5,19 +5,12 @@
  */
 package mx.empenofacil.dao;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
-import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.image.Image;
-import javax.imageio.ImageIO;
 import mx.empenofacil.mybatis.MyBatisUtils;
 import mx.empenofacil.beans.Cliente;
-import mx.empenofacil.beans.Foto;
 import mx.empenofacil.beans.ItemCatalogo;
 import org.apache.ibatis.session.SqlSession;
 
@@ -26,7 +19,7 @@ import org.apache.ibatis.session.SqlSession;
  * @author Rainbow Dash
  */
 public class ClienteDAO {
-
+    
     public static List<Cliente> getTodos() {
         List<Cliente> resultado = null;
         try (SqlSession session = MyBatisUtils.getSession()) {
@@ -36,10 +29,10 @@ public class ClienteDAO {
         }
         return resultado;
     }
-
-    public static boolean agregarCliente(Cliente cliente) {
+    
+    public static boolean agregarCliente(Cliente cliente){
         SqlSession conn = null;
-        try {
+        try{
             conn = MyBatisUtils.getSession();
             HashMap<String, Object> parametros = new HashMap<>();
             parametros.put("nombres", cliente.getNombres());
@@ -50,36 +43,23 @@ public class ClienteDAO {
             parametros.put("tipoidentificacion", cliente.getTipoidentificacion());
             int numeroFilasAfectadas = 0;
             numeroFilasAfectadas = conn.insert("Cliente.registrarCliente", parametros);
-
-            for (Image img : cliente.getFotos()) {
-                Random rand = new Random();
-                BufferedImage bImage = SwingFXUtils.fromFXImage(img, null);
-                ByteArrayOutputStream s = new ByteArrayOutputStream();
-                ImageIO.write(bImage, "png", s);
-                byte[] image = s.toByteArray();
-                s.close();
-                Foto foto = new Foto(rand.nextInt(), cliente.getIdcliente(), image, "");
-                conn.insert("Foto.agregarFoto", foto);
-                conn.insert("Foto.relacionarFotoPrenda", foto);
-            }
-
             conn.commit();
-            if (numeroFilasAfectadas > 0) {
+            if(numeroFilasAfectadas > 0){
                 return true;
             }
-        } catch (Exception ex) {
+        } catch (Exception ex){
             ex.printStackTrace();
         } finally {
-            if (conn != null) {
+            if(conn != null){
                 conn.close();
             }
         }
         return false;
     }
-
-    public static boolean actualizarCliente(Cliente cliente) {
+    
+    public static boolean actualizarCliente(Cliente cliente){
         SqlSession conn = null;
-        try {
+        try{
             conn = MyBatisUtils.getSession();
             HashMap<String, Object> parametros = new HashMap<>();
             parametros.put("nombres", cliente.getNombres());
@@ -92,35 +72,35 @@ public class ClienteDAO {
             int numeroFilasAfectadas = 0;
             numeroFilasAfectadas = conn.update("Cliente.actualizarCliente", parametros);
             conn.commit();
-            if (numeroFilasAfectadas > 0) {
+            if(numeroFilasAfectadas > 0){
                 return true;
             }
-        } catch (Exception ex) {
+        } catch (Exception ex){
             ex.printStackTrace();
         } finally {
-            if (conn != null) {
+            if(conn != null){
                 conn.close();
             }
         }
         return false;
     }
-
-    public static Cliente buscarPorCURP(String curp) {
+    
+    public static Cliente buscarPorCURP(String curp){
         Cliente cliente = null;
         SqlSession conn = null;
-        try {
+        try{
             conn = MyBatisUtils.getSession();
             cliente = conn.selectOne("Cliente.buscarClienteCURP", curp);
-        } catch (Exception ex) {
+        } catch (Exception ex){
             ex.printStackTrace();
         } finally {
-            if (conn != null) {
+            if(conn != null){
                 conn.close();
             }
         }
         return cliente;
     }
-
+    
     public static Cliente buscarPorId(int id) {
         Cliente resultado = null;
         try (SqlSession session = MyBatisUtils.getSession()) {
@@ -130,7 +110,7 @@ public class ClienteDAO {
         }
         return resultado;
     }
-
+    
     public static List<Cliente> buscarPorIdNombreRfcCurp(String busqueda) {
         List<Cliente> resultado = null;
         try (SqlSession session = MyBatisUtils.getSession()) {
@@ -140,7 +120,7 @@ public class ClienteDAO {
         }
         return resultado;
     }
-
+    
     public static List<Cliente> buscarRecientes(int cantidad) {
         List<Cliente> resultado = null;
         try (SqlSession session = MyBatisUtils.getSession()) {
@@ -150,17 +130,17 @@ public class ClienteDAO {
         }
         return resultado;
     }
-
-    public static List<ItemCatalogo> obtenerTiposIdentificacion() {
+    
+    public static List<ItemCatalogo> obtenerTiposIdentificacion(){
         List<ItemCatalogo> identificaciones = new ArrayList<>();
         SqlSession conn = null;
-        try {
+        try{
             conn = MyBatisUtils.getSession();
             identificaciones = conn.selectList("Cliente.obtenerTiposIdentificacion");
-        } catch (Exception ex) {
+        } catch (Exception ex){
             ex.printStackTrace();
         } finally {
-            if (conn == null) {
+            if(conn == null){
                 conn.close();
             }
         }

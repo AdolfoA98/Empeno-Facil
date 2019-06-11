@@ -26,16 +26,20 @@ public class Empeno {
     private String nombrecotitular;
     private Integer estatusEmpeno;
     private List<Prenda> prendas;
-    private Boolean extendido;
-    private Boolean vencido;
-    private Boolean cancelado;
-    private Boolean comercializado;
 
     /**
      * @return the idempeno
      */
     public Integer getIdempeno() {
         return idempeno;
+    }
+
+    public Integer getEstatusEmpeno() {
+        return estatusEmpeno;
+    }
+
+    public void setEstatusEmpeno(Integer estatusEmpeno) {
+        this.estatusEmpeno = estatusEmpeno;
     }
 
     /**
@@ -177,76 +181,6 @@ public class Empeno {
 
     public void setPrendas(List<Prenda> prendas) {
         this.prendas = prendas;
-    }
-
-    /**
-     * @return the extendido
-     */
-    public Boolean getExtendido() {
-        return extendido;
-    }
-
-    /**
-     * @return the vencido
-     */
-    public Boolean getVencido() {
-        return vencido;
-    }
-
-    /**
-     * @param vencido the vencido to set
-     */
-    public void setVencido(Boolean vencido) {
-        this.vencido = vencido;
-    }
-
-    /**
-     * @return the cancelado
-     */
-    public Boolean getCancelado() {
-        return cancelado;
-    }
-
-    /**
-     * @return the comercializado
-     */
-    public Boolean getComercializado() {
-        return comercializado;
-    }
-
-    /**
-     * @param extendido the extendido to set
-     */
-    public void setExtendido(Boolean extendido) {
-        this.extendido = extendido;
-    }
-
-    /**
-     * @param cancelado the cancelado to set
-     */
-    public void setCancelado(Boolean cancelado) {
-        this.cancelado = cancelado;
-    }
-
-    /**
-     * @param comercializado the comercializado to set
-     */
-    public void setComercializado(Boolean comercializado) {
-        this.comercializado = comercializado;
-    }
-
-    /**
-     * @return the statusEmpeno
-     */
-    public Integer getEstatusEmpeno() {
-        return estatusEmpeno;
-    }
-
-    /**
-     * @param estatusEmpeno the statusEmpeno to set
-     */
-    public void setEstatusEmpeno(Integer estatusEmpeno) {
-        this.estatusEmpeno = estatusEmpeno;
     }
     
 }

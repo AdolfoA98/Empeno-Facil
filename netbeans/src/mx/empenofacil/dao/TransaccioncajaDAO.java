@@ -5,42 +5,88 @@
  */
 package mx.empenofacil.dao;
 
+import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mx.empenofacil.beans.Sucursal;
+import mx.empenofacil.beans.TransaccionCaja;
 import mx.empenofacil.mybatis.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
 
 /**
  *
- * @author adolf
+ * @author Razer
  */
-public class TransaccioncajaDAO {
+public class TransaccionCajaDAO {
     
-    public static Integer obtenerUltimoId() {
-        Integer id = 0;
-        
-        try (SqlSession conn = MyBatisUtils.getSession()) {
-            id = conn.selectOne("getUltimoId");
-        } catch (Exception ex) {
-            Logger.getLogger(BolsaDAO.class.getName()).log(Level.SEVERE, null, ex);
+    public static TransaccionCaja registrarMovimiento(Sucursal sucursal, BigDecimal monto, String descripcion) {
+        TransaccionCaja resultado = null;
+        try (SqlSession session = MyBatisUtils.getSession()) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("idsucursal", sucursal.getIdsucursal());
+            params.put("monto", monto);
+            params.put("descripcion", descripcion);
+            session.insert("transaccion.registrar", params);
+            session.commit();
+            Integer id = ((Long) params.get("idtransaccioncaja")).intValue();
+            resultado = session.selectOne("transaccion.buscarPorId", id);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
-        
-        return id;
+        return resultado;
     }
     
-    public static boolean registrarTransaccion(HashMap<String, Object> parametros){
-        boolean completado = true;
-        
-        try (SqlSession conn = MyBatisUtils.getSession()) {
-            conn.insert("registrarTransaccion", parametros);
-            conn.commit();
-        } catch (Exception ex) {
-            Logger.getLogger(BolsaDAO.class.getName()).log(Level.SEVERE, null, ex);
-            completado = false;
+    public static TransaccionCaja registrarMovimientoApartado(Sucursal sucursal, Double monto, String descripcion) {
+        TransaccionCaja resultado = null;
+        try (SqlSession session = MyBatisUtils.getSession()) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("idsucursal", sucursal.getIdsucursal());
+            params.put("monto", monto);
+            params.put("descripcion", descripcion);
+            session.insert("transaccion.registrar", params);
+            session.commit();
+            Integer id = ((Long) params.get("idtransaccioncaja")).intValue();
+            resultado = session.selectOne("transaccion.buscarPorId", id);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
-        
-        return completado;
+        return resultado;
+    }
+    
+    public static TransaccionCaja obtenerMovimientoApartado(Integer transaccion){
+        TransaccionCaja caja = new TransaccionCaja();
+        try(SqlSession session = MyBatisUtils.getSession()){
+            caja = session.selectOne("transaccion.obtenerTransaccionApartado", transaccion);
+        } catch (IOException ex) {
+            Logger.getLogger(TransaccionCajaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return caja;
+    }
+    
+    public static TransaccionCaja cancelarMovimiento(TransaccionCaja transaccionCaja, String descripcion) {
+        TransaccionCaja resultado = null;
+        try (SqlSession session = MyBatisUtils.getSession()) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("idsucursal", transaccionCaja.getSucursal().getIdsucursal());
+            params.put("monto", transaccionCaja.getMonto().negate());
+            params.put("descripcion", descripcion);
+            session.insert("transaccion.registrar", params);
+            session.commit();
+            
+            Integer id = ((Long) params.get("idtransaccioncaja")).intValue();
+            params.put("idtransaccioncancelada", transaccionCaja.getIdTransaccionCaja());
+            params.put("idtransacciongenerada", id);
+            session.update("transaccion.cancelacion",params);
+            session.commit();
+            
+            resultado = session.selectOne("transaccion.buscarPorId", id);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return resultado;
     }
     
 }

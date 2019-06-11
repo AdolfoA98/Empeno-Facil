@@ -11,16 +11,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         limit 1;
     </select>
     
-    <select id="getUltimoId" resultType="int">
-        SELECT idtransaccioncaja
-        FROM empenofacil.transaccioncaja
-        ORDER BY idtransaccioncaja DESC
-        limit 1;
-    </select>
-    
-    <insert id="registrarTransaccion" parameterType="map">
+    <insert id="setMontoBolsa" parameterType="map">
         INSERT INTO transaccioncaja
-        VALUES (NULL, #{sucursal}, NULL, #{monto}, #{balacecaja}, NOW(), #{descripcion});
+        VALUES (NULL, #{sucursal}, NULL, #{monto}, #{balancecaja}, NOW(), #{descripcion});
     </insert>
     
     <insert id="registrarPrenda" parameterType="mx.empenofacil.beans.Prenda">
@@ -38,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
     
     <insert id="registrarEmpeno" parameterType="mx.empenofacil.beans.Empeno">
-        INSERT INTO empenoview VALUES (
+        INSERT INTO empeno VALUES (
             #{idempeno},
             #{empleado},
             #{cliente},
@@ -48,12 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{fechaextendida},
             #{interes},
             #{almacenaje},
-            #{nombrecotitular},
-            #{estatusEmpeno},
-            #{extendido},
-            #{vencido},
-            #{cancelado},
-            #{comercializado}
+            #{nombrecotitular}
         );
     </insert>
     

@@ -9,10 +9,9 @@
 <?import javafx.geometry.Insets?>
 <?import java.net.URL?>
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
 
 <BorderPane fx:id="mainPane"
-            prefHeight="580.0"
+            prefHeight="530.0"
             prefWidth="850.0"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="mx.empenofacil.gui.controllers.RegistrarEmpenoController">
@@ -36,7 +35,6 @@
             
             <JFXButton fx:id="guardarBtn"
                        text="Guardar"
-                       onAction="#guardar" 
                        StackPane.alignment="CENTER_RIGHT">
                 <StackPane.margin>
                     <Insets right="10"/>
@@ -70,7 +68,7 @@
             <HBox>
                 <javafx.scene.image.ImageView fitHeight="80"
                                               fitWidth="80"
-                                              fx:id="fotoClienteView"
+                                              fx:id="fotoClienteView1"
                                               preserveRatio="true" >
                     <image>
                         <javafx.scene.image.Image url="/mx/empenofacil/imagenes/default.png" />
@@ -94,7 +92,7 @@
                     
                     <JFXButton fx:id="verFotosClienteBtn"
                                text=" Ver fotos"
-                               onAction="#verFotos" 
+                               onAction="#tomarFotoCliente" 
                                style="-fx-background-color:#EEEBEB;"
                                StackPane.alignment="BOTTOM_LEFT">
                         <font>
@@ -125,7 +123,6 @@
             </Label>
     
             <TextField fx:id="nombreCliente"
-                       editable="false"  
                        minWidth="290">
                 <VBox.margin>
                     <Insets top="5"
@@ -146,7 +143,6 @@
             </Label>
     
             <TextField fx:id="apellidoCliente"
-                       editable="false"
                        minWidth="290">
                 <VBox.margin>
                     <Insets top="5"
@@ -167,7 +163,6 @@
             </Label>
     
             <TextField fx:id="rfc"
-                       editable="false"
                        minWidth="290">
                 <VBox.margin>
                     <Insets top="5"
@@ -188,7 +183,6 @@
             </Label>
     
             <TextField fx:id="curp"
-                       editable="false" 
                        minWidth="290">
                 <VBox.margin>
                     <Insets top="5"
@@ -209,67 +203,6 @@
             </Label>
     
             <TextField fx:id="identificacion"
-                       editable="false" 
-                       minWidth="290">
-                <VBox.margin>
-                    <Insets top="5"
-                            left="20"
-                            right="20"/>
-                </VBox.margin>
-            </TextField>
-            
-            <Label text="Interés">
-                <font>
-                    <Font name="Segoe UI Semilight"/>
-                </font>
-                <VBox.margin>
-                    <Insets top="8"
-                            left="20"
-                            right="20"/>
-                </VBox.margin>
-            </Label>
-    
-            <TextField fx:id="interesTxt"
-                       minWidth="290">
-                <VBox.margin>
-                    <Insets top="5"
-                            left="20"
-                            right="20"/>
-                </VBox.margin>
-            </TextField>
-            
-            <Label text="Almacenaje">
-                <font>
-                    <Font name="Segoe UI Semilight"/>
-                </font>
-                <VBox.margin>
-                    <Insets top="8"
-                            left="20"
-                            right="20"/>
-                </VBox.margin>
-            </Label>
-    
-            <TextField fx:id="almacenajeTxt"
-                       minWidth="290">
-                <VBox.margin>
-                    <Insets top="5"
-                            left="20"
-                            right="20"/>
-                </VBox.margin>
-            </TextField>
-            
-            <Label text="Nombre cotitular">
-                <font>
-                    <Font name="Segoe UI Semilight"/>
-                </font>
-                <VBox.margin>
-                    <Insets top="8"
-                            left="20"
-                            right="20"/>
-                </VBox.margin>
-            </Label>
-    
-            <TextField fx:id="cotitularTxt"
                        minWidth="290">
                 <VBox.margin>
                     <Insets top="5"
@@ -347,7 +280,6 @@
             <StackPane maxWidth="380" >
                 <JFXButton fx:id="editarPrendaBtn"
                            text="Editar"
-                           onAction="#editarPrenda" 
                            StackPane.alignment="CENTER_RIGHT"
                            style="-fx-background-color:#EEEBEB;" >
                         
@@ -355,7 +287,6 @@
                 
                 <JFXButton fx:id="registrarPrendaBtn"
                            text="Añadir"
-                           onAction="#agregarPrenda" 
                            StackPane.alignment="CENTER_RIGHT"
                            style="-fx-background-color:#EEEBEB;" >
                     <StackPane.margin>
@@ -369,32 +300,14 @@
                             right="20"/>
                 </VBox.margin>
             </StackPane>
-            <TableView fx:id="prendasView"
-                      maxWidth="380" >
-                <columns>
-                    <TableColumn text="Nombre" minWidth="180" >
-                        <cellValueFactory>
-                            <PropertyValueFactory property="nombre" /> 
-                        </cellValueFactory>
-                    </TableColumn>
-                    <TableColumn text="Avalúo" minWidth="100" >
-                        <cellValueFactory>
-                            <PropertyValueFactory property="avaluo"/> 
-                        </cellValueFactory>
-                    </TableColumn>
-                    <TableColumn text="Monto prestado" minWidth="100" >
-                        <cellValueFactory>
-                            <PropertyValueFactory property="montoprestado" /> 
-                        </cellValueFactory>
-                    </TableColumn>   
-                </columns>
+            <ListView maxWidth="380" >
                 <VBox.margin>
                     <Insets top="5"
                             bottom="20" 
                             left="20"
                             right="20"/>
                 </VBox.margin>
-            </TableView>
+            </ListView>
         </VBox>
     </right>
 </BorderPane>

@@ -3,7 +3,7 @@
 
 <mapper namespace="prenda">
     
-    <resultMap id="prendaMap" type="mx.empenofacil.beans.Prenda">
+    <resultMap id="prendaMap" type="mx.empenofacil.beans.Prenda2">
         <id column="idprenda" property="idPrenda"/>
         <association column="tipo" property="tipo" select="itemCatalogo.buscarPorId"/>
         <association column="categoria" property="categoria" select="itemCatalogo.buscarPorId"/>
@@ -21,8 +21,12 @@
         WHERE empeno = #{idempeno};
     </select>
     
-    <select id="getTiposPrenda" resultType="mx.empenofacil.beans.ItemCatalogo">
-        SELECT * FROM empenofacil.itemcatalogo WHERE itemcatalogoSuperior = 3;
+    <select id="buscarPrendaPorEmpeno" resultType="mx.empenofacil.beans.Prenda" parameterType="int">
+        SELECT * FROM empenofacil.prenda WHERE empeno = #{idempeno};
     </select>
     
+    <insert id="agregarPrenda" parameterType="mx.empenofacil.beans.Prenda">
+        INSERT INTO empenofacil.prenda (empeno, tipo, categoria, avaluo, montoprestado, nombre, descripcion, peso) 
+        VALUES (#{empeno},#{tipo},#{categoria},#{avaluo},#{montoprestado},#{nombre},#{descripcion},#{peso});
+    </insert>
 </mapper>

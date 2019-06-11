@@ -3,10 +3,75 @@
 
 <mapper namespace="articulo">
     
+    <resultMap id="articuloMap" type="mx.empenofacil.beans.Articulo">
+        <id column="idarticulo" property="idarticulo"/>
+        <association column="prenda" property="prenda" select="prenda.buscarPorId"/>
+        <association column="empleado" property="empleado" select="empleado.buscarPorId"/>
+        <association column="estatusArticulo" property="status" select="itemCatalogo.buscarPorId"/>
+    </resultMap>
+    
     <insert id="comercializar" parameterType="mx.empenofacil.beans.Articulo">
         INSERT INTO empenofacil.articulo
-        (prenda,empleado,precio,descuento,codigodebarras,nombre,descripcion)
-        VALUES(#{prenda.idPrenda},#{empleado.idEmpleado},#{precio},0,#{codigoDeBarras},#{nombre},#{descripcion});
+        (prenda,empleado,precio,descuento,codigodebarras,nombre,descripcion,estatusArticulo)
+        VALUES(#{prenda.idPrenda},#{empleado.idempleado},#{precio},0,#{codigodebarras},#{nombre},#{descripcion},33);
     </insert>
     
+    <select id="buscar" parameterType="string" resultMap="articuloMap">
+        SELECT *
+        FROM empenofacil.articulo
+        WHERE codigodebarras = #{busqueda}
+        OR nombre LIKE CONCAT('%', #{busqueda}, '%')
+        OR descripcion LIKE CONCAT('%', #{busqueda}, '%');
+    </select>
+    
+    <update id="modificar" parameterType="mx.empenofacil.beans.Articulo">
+        UPDATE empenofacil.articulo
+        SET
+        nombre = #{nombre},
+        descripcion = #{descripcion},
+        precio = #{precio}
+        WHERE idarticulo = #{idarticulo};
+    </update>
+    
+    <update id="marcarVendido" parameterType="mx.empenofacil.beans.Articulo">
+        UPDATE empenofacil.articulo
+        SET
+        estatusArticulo = 32
+        WHERE idarticulo = #{idarticulo};
+    </update>
+    
+    <update id="marcarApartado" parameterType="mx.empenofacil.beans.Articulo">
+        UPDATE empenofacil.articulo
+        SET
+        estatusArticulo = 31
+        WHERE idarticulo = #{idarticulo};
+    </update>
+    
+    <select id="obtenerArticulosApartado" resultType="mx.empenofacil.beans.ArticuloEnApartado" parameterType="int">
+        SELECT * FROM empenofacil.articuloenapartado WHERE apartado = #{apartado};
+    </select>
+    
+    <select id="obtenerArticuloPorId" resultType="mx.empenofacil.beans.Articulo" parameterType="int">
+        SELECT * FROM empenofacil.articulo WHERE idarticulo = #{articulo};
+    </select>
+    
+    <update id="marcarDisponible" parameterType="mx.empenofacil.beans.Articulo">
+        UPDATE empenofacil.articulo
+        SET
+        estatusArticulo = 33
+        WHERE idarticulo = #{idarticulo};
+    </update>
+    
+    <update id="cambiarEstado" parameterType="mx.empenofacil.beans.Articulo">
+        UPDATE empenofacil.articulo
+        SET estatusArticulo = #{estado}
+        WHERE idarticulo = #{idarticulo};
+    </update>
+    
+    <select id="vendidos" parameterType="int" resultMap="articuloMap">
+        SELECT articulo.*
+        FROM articuloenventa
+        JOIN articulo ON articulo.idarticulo = articuloenventa.articulo
+        WHERE venta = #{id};
+    </select>
 </mapper>

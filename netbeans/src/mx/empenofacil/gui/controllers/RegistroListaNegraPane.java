@@ -73,7 +73,7 @@ public class RegistroListaNegraPane extends GridPane implements Initializable {
         
         cliente.setText(registroListaNegra.getCliente().getNombreCompleto());
         motivoAgrega.setText(registroListaNegra.getMotivoAgrega());
-        fechaAgrega.setText(registroListaNegra.getFechaAgrega().format(formatter));
+        //fechaAgrega.setText(registroListaNegra.getFechaAgrega().format(formatter));
         empleadoAgrega.setText(registroListaNegra.getEmpleadoAgrega().getNombreCompleto());
         
         if (registroListaNegra.estaActivo()) {

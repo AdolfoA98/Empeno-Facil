@@ -4,7 +4,7 @@
 <mapper namespace="cliente">
     
     <resultMap id="clienteMap" type="mx.empenofacil.beans.Cliente">
-        <id column="idcliente" property="idCliente"/>
+        <id column="idcliente" property="idcliente"/>
         <association column="tipoidentificacion" property="tipoIdentificacion" select="itemCatalogo.buscarPorId"/>
     </resultMap>
     
@@ -31,4 +31,7 @@
         LIMIT #{cantidad};
     </select>
     
+    <select id="buscarClientePorEmpeno" resultType="mx.empenofacil.beans.Cliente" parameterType="int">
+        SELECT * FROM empenofacil.cliente WHERE idcliente = #{cliente};
+    </select>
 </mapper>

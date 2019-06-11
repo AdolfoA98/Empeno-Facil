@@ -11,8 +11,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
             <dataSource type="POOLED" >
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
                 <property name="url" value="jdbc:mysql://localhost/empenofacil?useSSL=true"/>
-                <property name="username" value="proyProcessJ"/>
-                <property name="password" value="proyProcessJ"/>
+                <property name="username" value="root"/>
+                <property name="password" value="PinkieDash5"/>
                 <property name="poolMaximumActiveConnections" value="50"/>
             </dataSource>
         </environment>
@@ -31,8 +31,11 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         <mapper resource="mx/empenofacil/mappers/ListaNegraMapper.xml"/>
         <mapper resource="mx/empenofacil/mappers/TransaccionMapper.xml"/>
         <mapper resource="mx/empenofacil/mappers/PrendaMapper.xml"/>
-        <mapper resource="mx/empenofacil/mappers/EmpenoMapper.xml"/>
+        <mapper resource="mx/empenofacil/mappers/EmpeñoMapper.xml"/>
         <mapper resource="mx/empenofacil/mappers/ArticuloMapper.xml"/>
-        <mapper resource="mx/empenofacil/mappers/FotoMapper.xml"/>
+        <mapper resource="mx/empenofacil/mappers/RefrendoMapper.xml"/>
+        <mapper resource="mx/empenofacil/mappers/ReempenoMapper.xml"/>
+        <mapper resource="mx/empenofacil/mappers/VentaMapper.xml"/>
+        <mapper resource="mx/empenofacil/mappers/ApartadoMapper.xml"/>
     </mappers>
 </configuration>

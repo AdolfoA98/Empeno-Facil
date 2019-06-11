@@ -58,12 +58,6 @@ public class ClientePane extends GridPane implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // todo cargar foto de cliente
-        File placeholder = new File("src/mx/empenofacil/imagenes/placeholder_cliente.png");
-        Image image = new Image(placeholder.toURI().toString());
-        
-        foto.setImage(image);
-        
         id.setText(String.format("(%d)", cliente.getIdcliente()));
         nombre.setText(cliente.getNombreCompleto());
         rfc.setText(cliente.getRfc());

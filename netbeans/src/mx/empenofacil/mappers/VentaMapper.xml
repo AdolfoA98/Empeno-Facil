@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="venta">
+    
+    <resultMap id="ventaMap" type="mx.empenofacil.beans.Venta">
+        <id column="idventa" property="idventa"/>
+        <association column="empleado" property="empleado" select="empleado.buscarPorId"/>
+        <association column="cliente" property="cliente" select="cliente.buscarPorId"/>
+        <association column="transaccioncaja" property="transaccioncaja" select="transaccion.buscarPorId"/>
+        <association column="estatusVenta" property="estatusVenta" select="itemCatalogo.buscarPorId"/>
+        <collection column="idventa" property="articulos" select="articulo.vendidos"/>
+    </resultMap>
+    
+    <insert id="registrar" parameterType="map" useGeneratedKeys="true" keyProperty="idventa">
+        INSERT INTO empenofacil.venta
+        (empleado,cliente,transaccioncaja,estatusVenta)
+        VALUES(#{idempleado},#{idcliente},#{idtransaccioncaja},#{estatusVenta});
+    </insert>
+    
+    <insert id="registrarArticulos" parameterType="map">
+        INSERT INTO empenofacil.articuloenventa
+        (venta,articulo)
+        VALUES
+        <foreach item="articulo" collection="articulos" separator=",">
+            (#{idventa},#{articulo.idarticulo})
+        </foreach>
+    </insert>
+    
+    <select id="buscar" parameterType="map" resultMap="ventaMap">
+        SELECT venta.* FROM venta
+        JOIN articuloenventa on venta.idventa = articuloenventa.venta
+        JOIN articulo on articulo.idarticulo = articuloenventa.articulo
+        JOIN empleado on empleado.idempleado = venta.empleado
+        JOIN cliente on cliente.idcliente = venta.cliente
+        JOIN transaccioncaja on transaccioncaja.idtransaccioncaja = transaccioncaja
+        JOIN itemcatalogo on itemcatalogo.iditemcatalogo = estatusVenta
+        WHERE CONCAT(empleado.nombres," ",empleado.apellidos) LIKE CONCAT('%', #{empleado}, '%')
+        AND CONCAT(cliente.nombres," ", cliente.apellidos) LIKE CONCAT('%', #{cliente}, '%')
+        AND transaccioncaja.fechahora BETWEEN #{desde} AND #{hasta}
+        AND (articulo.nombre LIKE CONCAT('%', #{articulo}, '%') OR articulo.descripcion LIKE CONCAT('%', #{articulo}, '%'))
+        AND itemcatalogo.nombre LIKE CONCAT('%', #{estado}, '%')
+        GROUP BY venta.idventa
+        LIMIT #{limit};
+    </select>
+    
+    <update id="cambiarEstado" parameterType="map">
+        UPDATE venta
+        SET estatusVenta = #{estado}
+        WHERE idventa = #{idventa};
+    </update>
+</mapper>
