@@ -274,9 +274,11 @@ public class RegistrarEmpenoController implements Initializable {
                 
                 cliente.setFotos(fotosCliente);
                 if (!editarCliente) {
+                    System.out.println("Agregar");
                     cliente.setIdcliente(rand.nextInt());
                     ClienteDAO.agregarCliente(cliente);
                 } else {
+                    System.out.println("Actualizar");
                     ClienteDAO.actualizarCliente(cliente);
                 }
                 
